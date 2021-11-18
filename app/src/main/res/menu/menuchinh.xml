@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itemQLKV"
+        android:title="Quản lý khu vực"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/itemQLSP"
+        android:title="Quản Lý Sản Phẩm"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/itemQLNHV"
+        android:title="Quản Lý Nhân Viên"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/itemDanhThu"
+        android:title="Danh Thu"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/itemLogOut"
+        android:title="Log Out"
+        app:showAsAction="never"/>
+</menu>

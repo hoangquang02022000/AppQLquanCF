@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "601285377359",
+    "firebase_url": "https://quanlyquancafe-40ece-default-rtdb.firebaseio.com",
+    "project_id": "quanlyquancafe-40ece",
+    "storage_bucket": "quanlyquancafe-40ece.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601285377359:android:72cb6334ff6b52fb5bd93a",
+        "android_client_info": {
+          "package_name": "com.hoangquangdev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601285377359-infp8jllrmle39rbp2dad8n6d9ghhbm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByhieeCXPo7TfqjWNKWp-gM1Pmylz8TG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601285377359-infp8jllrmle39rbp2dad8n6d9ghhbm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

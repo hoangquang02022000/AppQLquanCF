@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">QuanLyQuanCafe</string>
+    <string name="title_activity_view_ban">ViewBan</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="qlKhuVuc">Quản lý khu vực</string>
+    <string name="qlSanPham">Quản lý sản phẩm</string>
+    <string name="qlNhanVien">Quản lý nhân viên</string>
+    <string name="danhThu">DanhThu</string>
+</resources>

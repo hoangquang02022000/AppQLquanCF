@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable/bglogin.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable/bobtnlogin.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable/bogoc.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable/ic_account.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable/ic_key.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/drawable/ic_menu.xml" value="0.2703125" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/layout/activity_item_kv.xml" value="0.23233695652173914" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/layout/activity_main_dktk.xml" value="0.2" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/layout/activity_qlkv.xml" value="0.264" />
+        <entry key="..\:/QuanLyQuanCafe/app/src/main/res/layout/activity_toolbar.xml" value="0.23233695652173914" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_menu.xml" value="0.2703125" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_login.xml" value="0.18342391304347827" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_dktk.xml" value="0.2418478260869565" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlban.xml" value="0.264" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlkv.xml" value="0.245018115942029" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlphong.xml" value="0.245018115942029" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/fragment_first.xml" value="0.245018115942029" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_kv.xml" value="0.245018115942029" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/itemban.xml" value="0.2513586956521739" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/toolbar.xml" value="0.18342391304347827" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/menu/menuchinh.xml" value="0.264" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
