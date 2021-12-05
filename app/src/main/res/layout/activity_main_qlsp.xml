@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainQLSP">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_backgroud">
+
+        <Button
+            android:id="@+id/trove"
+            android:layout_width="69dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="252dp"
+            android:layout_height="match_parent"
+            android:text="Quản Lý Sản Phẩm"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:gravity="center"/>
+        <ImageButton
+            android:id="@+id/ibtn_QLSP_addSp"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:background="#02FFFFFF"
+            android:src="@drawable/add"
+            android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#C1D1DD">
+
+        <EditText
+            android:id="@+id/etxt_QLSP_nhapSP"
+            android:layout_width="283dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:hint="Nhập Tên Sản Phẩm"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/ibtn_QLSP_search"
+            android:layout_width="53dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_search" />
+    </LinearLayout>
+
+
+
+    <ListView
+        android:id="@+id/lv_SP"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,16 +1,12 @@
 package com.hoangquangdev;
 
-import androidx.annotation.Nullable;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hoangquangdev.Model.taiKhoan;
@@ -46,37 +42,28 @@ public class MainDKTK extends Activity {
 
     }
     private void addevent() {
-        btn_dangK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String dc = etxt_diaChi.getText().toString();
-                String ht =  etxt_hoTen.getText().toString();
-                String ngSinh = etxt_ngaySinh.getText().toString();
-                String email = etxt_Email.getText().toString();
-                String pass = etxt_passWord.getText().toString();
-                String sdt = etxt_sdt.getText().toString();
-                String user = etxt_tenDN.getText().toString();
+        btn_dangK.setOnClickListener(v -> {
+            String dc = etxt_diaChi.getText().toString();
+            String ht =  etxt_hoTen.getText().toString();
+            String ngSinh = etxt_ngaySinh.getText().toString();
+            String email = etxt_Email.getText().toString();
+            String pass = etxt_passWord.getText().toString();
+            String sdt = etxt_sdt.getText().toString();
+            String user = etxt_tenDN.getText().toString();
 
-                taiKhoan tk = new taiKhoan(user,pass,ht,ngSinh,dc,email,sdt);
+            taiKhoan tk = new taiKhoan(user,pass,ht,ngSinh,dc,email,sdt);
 
-//                DKTK dktk = new DKTK(etxt_tenDN.getText().toString(),etxt_passWord.getText().toString(),
-//                        etxt_hoTen.getText().toString(),etxt_ngaySinh.getText().toString() ,
-//                        etxt_diaChi.getText().toString(),etxt_Email.getText().toString(),etxt_sdt.getText().toString());
+            System.err.println(tk.toString());
+            mData.child("TaiKhoan").push().setValue(tk, (databaseError, databaseReference) -> {
+                if(databaseError==null){
+                    Toast.makeText(MainDKTK.this,"Đăng Ký Thành Công", Toast.LENGTH_SHORT).show();
+                    Intent mhdn = new Intent(MainDKTK.this,MainActivity.class);
+                    startActivity(mhdn);
 
-                mData.child("TaiKhoan").push().setValue(tk, new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError databaseError, DatabaseReference databaseReference) {
-                        if(databaseError==null){
-                            Toast.makeText(MainDKTK.this,"Đăng Ký Thành Công", Toast.LENGTH_SHORT).show();
-                            Intent mhdn = new Intent(MainDKTK.this,MainActivity.class);
-                            startActivity(mhdn);
-
-                        }else {
-                            Toast.makeText(MainDKTK.this,"Đăng Ký Thất Bại",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
+                }else {
+                    Toast.makeText(MainDKTK.this,"Đăng Ký Thất Bại",Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
     }

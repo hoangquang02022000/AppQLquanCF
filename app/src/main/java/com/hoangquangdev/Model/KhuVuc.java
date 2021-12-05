@@ -3,9 +3,9 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class KhuVuc implements Serializable {
-    private int maKV;
-    private String tenKV;
-    private int img;
+    protected int maKV;
+    protected String tenKV;
+    protected int img;
 
     public KhuVuc() {
     }

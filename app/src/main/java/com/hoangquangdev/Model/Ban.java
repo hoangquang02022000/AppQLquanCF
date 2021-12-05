@@ -3,26 +3,34 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class Ban implements Serializable {
-    private String maBan;
+    private int maKV;
+    private int maBan;
     private String tenBan;
     private int trangThai;
-    private  int imgBan;
 
     public Ban() {
     }
 
-    public Ban(String maBan, String tenBan, int trangThai, int imgBan) {
+    public Ban(int maKV, int maBan, String tenBan, int trangThai) {
+        this.maKV = maKV;
         this.maBan = maBan;
         this.tenBan = tenBan;
         this.trangThai = trangThai;
-        this.imgBan = imgBan;
     }
 
-    public String getMaBan() {
+    public int getMaKV() {
+        return maKV;
+    }
+
+    public void setMaKV(int maKV) {
+        this.maKV = maKV;
+    }
+
+    public int getMaBan() {
         return maBan;
     }
 
-    public void setMaBan(String maBan) {
+    public void setMaBan(int maBan) {
         this.maBan = maBan;
     }
 
@@ -40,13 +48,5 @@ public class Ban implements Serializable {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
-    }
-
-    public int getImgBan() {
-        return imgBan;
-    }
-
-    public void setImgBan(int imgBan) {
-        this.imgBan = imgBan;
     }
 }

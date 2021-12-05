@@ -41,13 +41,13 @@ public class Ban_Adapter extends ArrayAdapter<Ban> {
         ImageView img_Ban = row.findViewById(R.id.img_Ban);
         TextView txt_TenBan = row.findViewById(R.id.txt_tenBan);
         txt_TenBan.setText(ban.getTenBan());
-        img_Ban.setImageResource(ban.getImgBan());
+//        img_Ban.setImageResource(ban.getImgBan());
         //checkTrangThai
         if (ban.getTrangThai() == 0) {
             img_Ban.setImageResource(R.drawable.bantrong);
         } else if (ban.getTrangThai() == 1) {
             img_Ban.setImageResource(R.drawable.bancokhach);
-        } else if (ban.getTrangThai() == 3) {
+        } else if (ban.getTrangThai() == 2) {
             img_Ban.setImageResource(R.drawable.bandangdon);
         }
         return row;

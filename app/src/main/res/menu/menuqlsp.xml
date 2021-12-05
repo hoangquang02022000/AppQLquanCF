@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="To mau Xanh"
+        android:id="@+id/tomauxanh">
+    </item>
+    <item android:title="To mau Xanh2"
+        android:id="@+id/tomauxanh2">
+    </item>
+    <item android:title="To mau Xanh3"
+        android:id="@+id/tomauxanh3">
+    </item>
+</menu>

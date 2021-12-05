@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.QuanLyQuanCafe" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.QuanLyQuanCafe" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/xam</item>
         <item name="colorPrimaryVariant">@color/color_backgroud</item>
@@ -17,4 +17,5 @@
     <style name="Theme.QuanLyQuanCafe.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.QuanLyQuanCafe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
