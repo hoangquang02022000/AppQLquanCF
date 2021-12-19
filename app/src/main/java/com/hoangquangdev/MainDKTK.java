@@ -21,7 +21,7 @@ public class MainDKTK extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_dktk);
+        setContentView(R.layout.activity_dktk);
         addcontroll();
         mData = FirebaseDatabase.getInstance().getReference();
 

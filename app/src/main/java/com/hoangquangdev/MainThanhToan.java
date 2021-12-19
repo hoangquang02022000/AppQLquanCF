@@ -1,17 +1,14 @@
 package com.hoangquangdev;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.firebase.database.FirebaseDatabase;
 import com.hoangquangdev.Adapter.Hoadon_Adaper;
 import com.hoangquangdev.Model.Hoadon;
 
@@ -32,7 +29,7 @@ public class MainThanhToan extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.thanhtoan);
+        setContentView(R.layout.activity_thanhtoan);
         addcontroll();
 
 
@@ -54,9 +51,6 @@ public class MainThanhToan extends Activity {
                 finish();
             }
         });
-
-
-
 
     }
 

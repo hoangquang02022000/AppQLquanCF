@@ -105,6 +105,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
                 <TextView
+                    android:id="@+id/txt_diachi"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Phước Hiệp , Tuy Phước , Bình Định"
@@ -124,6 +125,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
                 <TextView
+                    android:id="@+id/txt_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="0961379812"
@@ -142,6 +144,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
                 <TextView
+                    android:id="@+id/etxt_email"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="hoangquanglhu@gmail.com"
@@ -161,6 +164,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
                 <TextView
+                    android:id="@+id/txt_chuVu"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Nhân Viên"
@@ -181,6 +185,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
                 <TextView
+                    android:id="@+id/txt_tk"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Quang02"
@@ -201,6 +206,7 @@
                     android:textSize="20dp" />
 
                 <TextView
+                    android:id="@+id/txt_pass"
                     android:layout_width="112dp"
                     android:layout_height="match_parent"
                     android:gravity="center"

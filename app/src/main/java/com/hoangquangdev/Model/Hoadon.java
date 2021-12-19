@@ -5,6 +5,8 @@ import java.io.SerializablePermission;
 
 public class Hoadon implements Serializable {
     private int idHoadon;
+    private int idKV;
+    private int idBan;
     private int idSanpham;
     private String tenSampam;
     private String size;
@@ -16,8 +18,10 @@ public class Hoadon implements Serializable {
     public Hoadon() {
     }
 
-    public Hoadon(int idHoadon, int idSanpham, String tenSampam, String size, String topping, int soLuong, double giaSanpham, String img) {
+    public Hoadon(int idHoadon, int idKV, int idBan, int idSanpham, String tenSampam, String size, String topping, int soLuong, double giaSanpham, String img) {
         this.idHoadon = idHoadon;
+        this.idKV = idKV;
+        this.idBan = idBan;
         this.idSanpham = idSanpham;
         this.tenSampam = tenSampam;
         this.size = size;
@@ -33,6 +37,22 @@ public class Hoadon implements Serializable {
 
     public void setIdHoadon(int idHoadon) {
         this.idHoadon = idHoadon;
+    }
+
+    public int getIdKV() {
+        return idKV;
+    }
+
+    public void setIdKV(int idKV) {
+        this.idKV = idKV;
+    }
+
+    public int getIdBan() {
+        return idBan;
+    }
+
+    public void setIdBan(int idBan) {
+        this.idBan = idBan;
     }
 
     public int getIdSanpham() {
@@ -89,19 +109,5 @@ public class Hoadon implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    @Override
-    public String toString() {
-        return "Hoadon{" +
-                "idHoadon=" + idHoadon +
-                ", idSanpham=" + idSanpham +
-                ", tenSampam='" + tenSampam + '\'' +
-                ", size='" + size + '\'' +
-                ", topping='" + topping + '\'' +
-                ", soLuong=" + soLuong +
-                ", giaSanpham=" + giaSanpham +
-                ", img='" + img + '\'' +
-                '}';
     }
 }

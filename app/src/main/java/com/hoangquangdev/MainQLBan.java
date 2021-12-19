@@ -63,6 +63,7 @@ public class MainQLBan extends AppCompatActivity {
         txt_tenKV.setText(bundle.getString("tenKV"));
 
 
+
         ban_adapter = new Ban_Adapter(MainQLBan.this, R.layout.itemban, dsBan);
         ban_adapter.notifyDataSetChanged();
     }
@@ -80,7 +81,16 @@ public class MainQLBan extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainQLBan.this,MainBan.class);
+                Bundle bundle = new Bundle();
+
+                //
+                bundle.putInt("maKV",dsBan.get(position).getMaKV());
+                bundle.putString("tenBan",dsBan.get(position).getTenBan());
+                bundle.putInt("maBan",dsBan.get(position).getMaBan());
+                intent.putExtra("send",bundle);
                 startActivity(intent);
+                System.out.println(dsBan.get(position).getMaBan()+dsBan.get(position).getTenBan()+dsBan.get(position).getMaKV());
+
             }
         });
         btn_Back.setOnClickListener(new View.OnClickListener() {
@@ -173,8 +183,6 @@ public class MainQLBan extends AppCompatActivity {
                 Intent intent = getIntent();
                 int maKV = intent.getIntExtra("maKV", 100);
                 Ban ban = new Ban(maKV,id,etxt_tenBan.getText().toString(),0);
-
-
                 mData.child("Ban").push().setValue(ban);
 
 

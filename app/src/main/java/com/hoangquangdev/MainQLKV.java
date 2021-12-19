@@ -128,8 +128,6 @@ public class MainQLKV extends AppCompatActivity implements NavigationView.OnNavi
                 Bundle bundle = new Bundle();
                 bundle.putString("tenKV",dsKhuVuc.get(position).getTenKV());
                 intent.putExtra("send",bundle);
-
-
                 intent.putExtra("maKV", dsKhuVuc.get(position).getMaKV());
                 startActivity(intent);
 

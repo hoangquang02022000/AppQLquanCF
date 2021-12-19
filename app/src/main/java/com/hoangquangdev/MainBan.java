@@ -44,13 +44,12 @@ public class MainBan extends Activity {
     SanPham_Adapter adapter , adapter_coffee ,adapter_milktea , adapter_drink ;
     Button btn_BackQLB,btn_order_them,btn_order;
     ImageButton btn_tru ,btn_cong,btn_back,ibtn_check;
-    TextView txt_tong,txt_tenSp,txt_giaSp,txt_tongSP,txt_SL,txt_tongGiaTien;
+    TextView txt_tong,txt_tenSp,txt_giaSp,txt_tongSP,txt_SL,txt_tongGiaTien,ten_Ban;
     ImageView img_sp;
     RadioGroup rb_Gr;
     CheckBox ck_order_topping;
 
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-
 
     DecimalFormat f = new DecimalFormat("##");
 
@@ -58,14 +57,27 @@ public class MainBan extends Activity {
     Hoadon hd = new Hoadon();
 
 
+
+    ///-----------
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_ban);
+        setContentView(R.layout.activity_ban);
+
         
         addcontroll();
         addevent();
         showSP();
+
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("send");
+        String tenBan = bundle.getString("tenBan");
+        ten_Ban.setText(tenBan);
+
     }
 
     private void addevent() {
@@ -155,10 +167,18 @@ public class MainBan extends Activity {
                 });
                 txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
                 txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+
+                //-------------------------------------------------------
+
+
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                         hd = new Hoadon(1,list_all.get(position).getMaSP()
+                        Intent intent = getIntent();
+                        Bundle bundle = intent.getBundleExtra("send");
+                        int idKV = bundle.getInt("maKV",100);
+                        int idBan = bundle.getInt("maBan",100);
+                         hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
                                 ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
                                 ,list_all.get(position).getImgSP());
                         ds_Hoadon.add(hd);
@@ -229,13 +249,21 @@ public class MainBan extends Activity {
                         txt_tongSP.setText(f.format(gia[0])+" VNĐ");
                     }
                 });
+
+                //--------------------------
+
+
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Hoadon hd = new Hoadon(1,list_coffee.get(position).getMaSP()
-                                ,list_coffee.get(position).getTenSP(),"m","có",sl[0],gia[0]
-                                ,list_coffee.get(position).getImgSP());
-                        finish();
+                        Intent intent = getIntent();
+                        Bundle bundle = intent.getBundleExtra("send");
+                        int idKV = bundle.getInt("maKV",100);
+                        int idBan = bundle.getInt("maBan",100);
+                        hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
+                                ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
+                                ,list_all.get(position).getImgSP());
+                        ds_Hoadon.add(hd);
                     }
                 });
 
@@ -302,13 +330,20 @@ public class MainBan extends Activity {
                         }
                     }
                 });
+
+                //-----------------------
+
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Hoadon hd = new Hoadon(1,list_drink.get(position).getMaSP()
-                                ,list_drink.get(position).getTenSP(),"m","có",sl[0],gia[0]
-                                ,list_drink.get(position).getImgSP());
-
+                        Intent intent = getIntent();
+                        Bundle bundle = intent.getBundleExtra("send");
+                        int idKV = bundle.getInt("maKV",100);
+                        int idBan = bundle.getInt("maBan",100);
+                        hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
+                                ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
+                                ,list_all.get(position).getImgSP());
+                        ds_Hoadon.add(hd);
 
                     }
                 });
@@ -378,15 +413,21 @@ public class MainBan extends Activity {
                         txt_tongSP.setText(f.format(gia[0])+" VNĐ");
                     }
                 });
+
+                //------------------------------------
+
+
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Hoadon hd = new Hoadon(1,list_mikltea.get(position).getMaSP()
-                                ,list_mikltea.get(position).getTenSP(),"m","có",sl[0],gia[0]
-                                ,list_mikltea.get(position).getImgSP());
-                        Intent intent = new Intent(MainBan.this,MainThanhToan.class);
-                        intent.putExtra("send_data",hd);
-                        startActivity(intent);
+                        Intent intent = getIntent();
+                        Bundle bundle = intent.getBundleExtra("send");
+                        int idKV = bundle.getInt("maKV",100);
+                        int idBan = bundle.getInt("maBan",100);
+                        hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
+                                ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
+                                ,list_all.get(position).getImgSP());
+                        ds_Hoadon.add(hd);
 
                     }
                 });
@@ -483,7 +524,7 @@ public class MainBan extends Activity {
     private void openOder(int gravity) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.order);
+        dialog.setContentView(R.layout.dialog_order);
 
         Window window = dialog.getWindow();
         if (window == null) {
@@ -563,7 +604,7 @@ public class MainBan extends Activity {
         txt_tong = findViewById(R.id.txt_tongGiaTien);
         btn_BackQLB =findViewById(R.id.btn_troveQLB);
         btn_order = findViewById(R.id.btn_order);
-
+        ten_Ban = findViewById(R.id.ten_Ban);
         txt_tongGiaTien = findViewById(R.id.txt_tongGiaTien);
         ibtn_check = findViewById(R.id.ibtn_check);
 
