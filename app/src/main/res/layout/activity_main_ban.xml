@@ -39,8 +39,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="620dp"
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <TabWidget
                     android:id="@android:id/tabs"
@@ -92,18 +93,26 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bgduoi">
+        android:layout_height="100dp"
+        android:background="@drawable/bgduoi"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="bottom"
+        android:gravity="center">
 
+        <ImageButton
+            android:id="@+id/ibtn_check"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/ic_baseline_sms_24"/>
         <TextView
             android:id="@+id/txt_tongGiaTien"
-            android:layout_width="173dp"
+            android:layout_width="wrap_content"
             android:layout_height="51dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="7dp"
 
-            android:text="giá Tiền"
+            android:text="0.000 VNĐ"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="25dp"
@@ -112,7 +121,6 @@
             android:id="@+id/btn_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
             android:textSize="20dp"
             android:text="order"
             android:textColor="@color/color_backgroud"

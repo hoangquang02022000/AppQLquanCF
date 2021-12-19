@@ -2,18 +2,34 @@ package com.hoangquangdev.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
+import com.hoangquangdev.MainQLSP;
 import com.hoangquangdev.Model.SanPham;
 import com.hoangquangdev.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -47,7 +63,8 @@ public class QLSP_Adapter extends ArrayAdapter<SanPham> {
         TextView  txt_QLSP_loaiSP = row.findViewById(R.id.txt_QLSP_loaiSP);
         TextView txt_QLSP_giaSP = row.findViewById(R.id.txt_QLSP_giaSP);
 
-        img_QLSP_imgSP.setImageResource(sanPham.getImgSP());
+        Picasso.get().load(sanPham.getImgSP()).into(img_QLSP_imgSP);
+
         txt_QLSP_tenSP.setText(sanPham.getTenSP());
         txt_QLSP_giaSP.setText(f.format(sanPham.getGiaSp())+"VNĐ");
         if (sanPham.getLoaiSP()==0){
@@ -56,11 +73,42 @@ public class QLSP_Adapter extends ArrayAdapter<SanPham> {
         else if (sanPham.getLoaiSP()==1){
             txt_QLSP_loaiSP.setText("Đóng Chai");
 
-        }else {
+        }else  {
             txt_QLSP_loaiSP.setText("Trà Sữa");
         }
 
+        ImageButton ibtn_Del =  row.findViewById(R.id.ibtn_QLSP_xoaSP);
 
+        ibtn_Del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                ref.child("SanPham").orderByChild("maSP").equalTo(sanPham.getMaSP())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                            {
+                                for (DataSnapshot ds : dataSnapshot.getChildren())
+                                {
+                                    ds.getRef().removeValue();
+                                    Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError)
+                            {
+                                Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+//                myData.child(String.valueOf(sanPham.getMaSP())).removeValue(new DatabaseReference.CompletionListener() {
+//                    @Override
+//                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+//                        Toast.makeText(context,"Xóa thành công",Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//                myData.removeValue(sanP);
+            }});
         return row;
     }
 }

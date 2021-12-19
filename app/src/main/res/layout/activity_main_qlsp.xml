@@ -39,7 +39,7 @@
         android:orientation="horizontal"
         android:background="#C1D1DD">
 
-        <EditText
+        <SearchView
             android:id="@+id/etxt_QLSP_nhapSP"
             android:layout_width="283dp"
             android:layout_height="match_parent"

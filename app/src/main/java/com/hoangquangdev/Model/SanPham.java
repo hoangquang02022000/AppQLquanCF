@@ -3,16 +3,17 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class SanPham implements Serializable {
-    private String maSP;
+    private int maSP;
     private String tenSP;
+
     private int loaiSP;
     private Double giaSp;
-    private int imgSP;
+    private String imgSP;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, int loaiSP, Double giaSp, int imgSP) {
+    public SanPham(int maSP, String tenSP, int loaiSP, Double giaSp, String imgSP) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.loaiSP = loaiSP;
@@ -20,11 +21,11 @@ public class SanPham implements Serializable {
         this.imgSP = imgSP;
     }
 
-    public String getMaSP() {
+    public int getMaSP() {
         return maSP;
     }
 
-    public void setMaSP(String maSP) {
+    public void setMaSP(int maSP) {
         this.maSP = maSP;
     }
 
@@ -52,22 +53,16 @@ public class SanPham implements Serializable {
         this.giaSp = giaSp;
     }
 
-    public int getImgSP() {
+    public String getImgSP() {
         return imgSP;
     }
 
-    public void setImgSP(int imgSP) {
+    public void setImgSP(String imgSP) {
         this.imgSP = imgSP;
     }
 
     @Override
     public String toString() {
-        return "SanPham{" +
-                "maSP='" + maSP + '\'' +
-                ", tenSP='" + tenSP + '\'' +
-                ", loaiSP=" + loaiSP +
-                ", giaSp=" + giaSp +
-                ", imgSP=" + imgSP +
-                '}';
+        return "ID: "+this.getMaSP() +" Name: "+this.getTenSP();
     }
 }

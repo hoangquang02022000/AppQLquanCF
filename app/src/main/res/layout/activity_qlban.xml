@@ -18,7 +18,8 @@
             android:id="@+id/btn_troveKV"
             android:layout_width="53dp"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_back"/>
+            android:background="@drawable/ic_back"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
         <TextView
@@ -35,7 +36,8 @@
             android:layout_width="68dp"
             android:layout_height="61dp"
             android:background="#02FFFFFF"
-            android:src="@drawable/add" />
+            android:src="@drawable/add"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_backgroud">
+
+        <ImageButton
+            android:id="@+id/btn_back_thanhtoan"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/txt_tenBan_thanhtoan"
+            android:layout_width="286dp"
+            android:layout_height="match_parent"
+            android:text="Tên Bàn"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="650dp">
+
+        <ListView
+            android:id="@+id/lv_sp_thanhtoan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bgduoi">
+        <TextView
+            android:id="@+id/txt_ThanhToan_tongGiaTien"
+            android:layout_width="173dp"
+            android:layout_height="51dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+
+            android:text="giá Tiền"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn_thanhtoan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:text="Thanh Toán"
+            android:textColor="@color/color_backgroud"
+            android:background="@drawable/bggiatien"
+            android:layout_marginLeft="30dp"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -10,7 +10,11 @@
         android:label="@string/qlKhuVuc"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.QuanLyQuanCafe">
+        android:theme="@style/Theme.QuanLyQuanCafe"
+        android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".QL_NhanVien"
+            android:exported="false" />
         <activity
             android:name=".MainQLSP"
             android:exported="true" />
@@ -28,6 +32,9 @@
             android:exported="true" />
         <activity
             android:name=".MainQLKV"
+            android:exported="true" />
+        <activity
+            android:name=".MainThanhToan"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
