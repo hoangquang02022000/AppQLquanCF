@@ -13,8 +13,8 @@
         android:theme="@style/Theme.QuanLyQuanCafe"
         android:windowSoftInputMode="stateHidden">
         <activity
-            android:name=".QL_NhanVien"
-            android:exported="false" />
+            android:name=".MainQLNhanVien"
+            android:exported="true" />
         <activity
             android:name=".MainQLSP"
             android:exported="true" />

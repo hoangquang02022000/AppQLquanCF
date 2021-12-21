@@ -31,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -45,10 +46,10 @@ public class MainQLSP extends Activity {
     ImageButton ibtn_xoa , ibtn_add,ibn_Del;
     RadioButton r_c,r_t,r_d;
     int r=0;
-    ImageView img_anh;
+    ImageView img_anh,ibtn_QLSP_xoaSP;
     EditText etxt_tenSp,etxt_giaSP;
     SearchView etxt_nhapSP;
-    Button btn_add;
+    Button btn_add,btn_yes;
     ListView lv_SP;
     ArrayList<SanPham>dsSanPhams=new ArrayList<>();
     QLSP_Adapter adapter;
@@ -57,8 +58,6 @@ public class MainQLSP extends Activity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-//    int REQUEST_CODE_IMAGE = 1;
-
     int id ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,12 +124,8 @@ public class MainQLSP extends Activity {
                 return false;
             }
         });
-//        ibn_Del.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            adapter.notifyDataSetChanged();
-//            }
-//        });
+
+
     }
 
 
@@ -139,7 +134,7 @@ public class MainQLSP extends Activity {
         ibtn_add = findViewById(R.id.ibtn_QLSP_addSp);
         lv_SP = findViewById(R.id.lv_SP);
         etxt_nhapSP = findViewById(R.id.etxt_QLSP_nhapSP);
-        ibn_Del = findViewById(R.id.ibtn_QLSP_xoaSP);
+        ibtn_QLSP_xoaSP = findViewById(R.id.ibtn_QLSP_xoaSP);
 
     }
 
@@ -174,7 +169,6 @@ public class MainQLSP extends Activity {
         r_c = dialog.findViewById(R.id.rdio_AddSP_Coffee);
         r_d = dialog.findViewById(R.id.rdio_AddSP_drink);
         r_t = dialog.findViewById(R.id.rdio_Addsp_teamilk);
-
         img_anh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,9 +178,9 @@ public class MainQLSP extends Activity {
                 if(r_c.isChecked()){
                     r =0;
                 }
-                 if(r_t.isChecked()){
+                 else if(r_t.isChecked()){
                     r = 2;
-                }if (r_d.isChecked()){
+                }else if (r_d.isChecked()){
                     r=1;
                 }
                 cloosePicture();
@@ -236,7 +230,8 @@ public class MainQLSP extends Activity {
                 mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        SanPham sanPham =new SanPham(id+1,etxt_tenSp.getText().toString(),r,Double.valueOf(etxt_giaSP.getText().toString()),String.valueOf(uri));
+                        SanPham sanPham =new SanPham(id+1,etxt_tenSp.getText().toString(),r
+                                ,Double.valueOf(etxt_giaSP.getText().toString()),String.valueOf(uri));
                         mData.child("SanPham").push().setValue(sanPham);
                         progressDialog.dismiss();
 //                Snackbar.make(findViewById(R.id.center),"Image Uploaded.",Snackbar.LENGTH_LONG).show();
@@ -261,5 +256,32 @@ public class MainQLSP extends Activity {
                     }
                 });
 
+
+    }
+    private void opendialog_thongbao(int gravity) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_xacnhan);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.gravity = gravity;
+        window.setAttributes(layoutParams);
+
+        if (Gravity.CENTER == gravity) {
+            dialog.setCancelable(true);
+        } else {
+            dialog.setCancelable(false);
+
+        }
+        btn_yes = dialog.findViewById(R.id.btn_yes);
+        dialog.show();
     }
 }

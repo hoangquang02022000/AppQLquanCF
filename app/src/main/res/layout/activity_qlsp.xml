@@ -41,7 +41,7 @@
 
         <SearchView
             android:id="@+id/etxt_QLSP_nhapSP"
-            android:layout_width="283dp"
+            android:layout_width="352dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:hint="Nhập Tên Sản Phẩm"
@@ -49,11 +49,6 @@
             android:textColorHint="@color/black"
             android:textSize="20dp" />
 
-        <ImageButton
-            android:id="@+id/ibtn_QLSP_search"
-            android:layout_width="53dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_search" />
     </LinearLayout>
 
 

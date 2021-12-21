@@ -9,14 +9,14 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/img_nv"
+        android:id="@+id/img_nv_"
         android:layout_width="62dp"
         android:layout_height="77dp"
 
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <TextView
-            android:id="@+id/txt_tenNV"
+            android:id="@+id/txt_tenNV_"
             android:layout_width="233dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/black"
-            android:hint="Nhân Viên"
+            android:text="Nhân Viên"
             android:textSize="20dp"
             android:textStyle="bold"/>
 

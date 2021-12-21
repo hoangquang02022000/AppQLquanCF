@@ -4,7 +4,6 @@ import static com.hoangquangdev.R.drawable.aa1;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.app.Activity;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,7 +19,6 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -193,6 +190,9 @@ public class MainQLKV extends AppCompatActivity implements NavigationView.OnNavi
 
             Intent qlsp = new Intent(this,MainQLSP.class);
             startActivity(qlsp);
+        }else if (item.getItemId()==R.id.itemQLNHV){
+            Intent intent = new Intent(MainQLKV.this, MainQLNhanVien.class);
+            startActivity(intent);
         }
 
 

@@ -3,14 +3,14 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class NhanVien implements Serializable {
-    private int idNhanVien;
+    private int idnhanVien;
     private String tenNV;
-    private int chucvu; //0,1,2
-    public String Nsinh;
-    public String Gtinh;
+    private String chucvu; //0,1,2
+    public String nsinh;
+    public String gtinh;
     public String phone;
     public String email;
-    public String Dchi;
+    public String dchi;
     public String taiKhoan;
     public String matKhau;
     public String img;
@@ -18,26 +18,26 @@ public class NhanVien implements Serializable {
     public NhanVien() {
     }
 
-    public NhanVien(int idNhanVien, String tenNV, int chucvu, String nsinh, String gtinh, String phone, String email, String dchi, String taiKhoan, String matKhau, String img) {
-        this.idNhanVien = idNhanVien;
+    public NhanVien(int idnhanVien, String tenNV, String chucvu, String nsinh, String gtinh, String phone, String email, String dchi, String taiKhoan, String matKhau, String img) {
+        this.idnhanVien = idnhanVien;
         this.tenNV = tenNV;
         this.chucvu = chucvu;
-        Nsinh = nsinh;
-        Gtinh = gtinh;
+        this.nsinh = nsinh;
+        this.gtinh = gtinh;
         this.phone = phone;
         this.email = email;
-        Dchi = dchi;
+        this.dchi = dchi;
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
         this.img = img;
     }
 
-    public int getIdNhanVien() {
-        return idNhanVien;
+    public int getIdnhanVien() {
+        return idnhanVien;
     }
 
-    public void setIdNhanVien(int idNhanVien) {
-        this.idNhanVien = idNhanVien;
+    public void setIdnhanVien(int idnhanVien) {
+        this.idnhanVien = idnhanVien;
     }
 
     public String getTenNV() {
@@ -48,28 +48,28 @@ public class NhanVien implements Serializable {
         this.tenNV = tenNV;
     }
 
-    public int getChucvu() {
+    public String getChucvu() {
         return chucvu;
     }
 
-    public void setChucvu(int chucvu) {
+    public void setChucvu(String chucvu) {
         this.chucvu = chucvu;
     }
 
     public String getNsinh() {
-        return Nsinh;
+        return nsinh;
     }
 
     public void setNsinh(String nsinh) {
-        Nsinh = nsinh;
+        this.nsinh = nsinh;
     }
 
     public String getGtinh() {
-        return Gtinh;
+        return gtinh;
     }
 
     public void setGtinh(String gtinh) {
-        Gtinh = gtinh;
+        this.gtinh = gtinh;
     }
 
     public String getPhone() {
@@ -89,11 +89,11 @@ public class NhanVien implements Serializable {
     }
 
     public String getDchi() {
-        return Dchi;
+        return dchi;
     }
 
     public void setDchi(String dchi) {
-        Dchi = dchi;
+        this.dchi = dchi;
     }
 
     public String getTaiKhoan() {
@@ -118,5 +118,22 @@ public class NhanVien implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    @Override
+    public String toString() {
+        return "NhanVien{" +
+                "idnhanVien=" + idnhanVien +
+                ", tenNV='" + tenNV + '\'' +
+                ", chucvu='" + chucvu + '\'' +
+                ", nsinh='" + nsinh + '\'' +
+                ", gtinh='" + gtinh + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", dchi='" + dchi + '\'' +
+                ", taiKhoan='" + taiKhoan + '\'' +
+                ", matKhau='" + matKhau + '\'' +
+                ", img='" + img + '\'' +
+                '}';
     }
 }

@@ -4,22 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QL_NhanVien">
-
+    android:orientation="vertical"
+    tools:context=".MainQLNhanVien">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="vertical">
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/color_backgroud">
+            android:background="@color/color_backgroud"
+            android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/txt_nv_thoat"
                 android:layout_width="59dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/ic_back" />
+                android:background="@drawable/ic_back"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,35 +30,35 @@
                 android:textStyle="bold" />
 
             <ImageButton
+                android:id="@+id/ibtn_add_nv"
                 android:layout_width="68dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="#02FFFFFF"
-                android:src="@drawable/add" />
-        </LinearLayout>
+                android:src="@drawable/add"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#C1D1DD"
-            android:orientation="horizontal">
-
-            <SearchView
-                android:layout_width="377dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:hint="Nhập Tên Sản Phẩm"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="20dp" />
     </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#C1D1DD"
+        android:orientation="vertical">
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="377dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:hint="Nhập Tên Sản Phẩm"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20dp" />
+
     </LinearLayout>
+    <ListView
+    android:id="@+id/lv_nhanVien"
+    android:layout_width="match_parent"
+    android:layout_height="620dp"
+    />
 </LinearLayout>

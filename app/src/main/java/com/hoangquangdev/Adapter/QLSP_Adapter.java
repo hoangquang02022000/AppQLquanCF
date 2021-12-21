@@ -55,7 +55,7 @@ public class QLSP_Adapter extends ArrayAdapter<SanPham> {
         LayoutInflater inflater = this.context.getLayoutInflater();
         row =  inflater.inflate(this.resource,null);
 
-        SanPham sanPham =this.object.get(position);;
+        SanPham sanPham =this.object.get(position);
 
         //QLSP
         ImageView img_QLSP_imgSP = row.findViewById(R.id.img_QLSP_imgSP);
@@ -101,13 +101,6 @@ public class QLSP_Adapter extends ArrayAdapter<SanPham> {
                                 Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
                             }
                         });
-//                myData.child(String.valueOf(sanPham.getMaSP())).removeValue(new DatabaseReference.CompletionListener() {
-//                    @Override
-//                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                        Toast.makeText(context,"Xóa thành công",Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//                myData.removeValue(sanP);
             }});
         return row;
     }
