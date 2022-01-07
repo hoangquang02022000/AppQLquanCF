@@ -21,7 +21,7 @@ import java.util.List;
 
 public class SanPham_Adapter extends ArrayAdapter<SanPham> {
 
-    DecimalFormat f = new DecimalFormat("##");
+    DecimalFormat f = new DecimalFormat("###,###,###");
 
     Activity context;
     int resource;

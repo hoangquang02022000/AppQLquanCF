@@ -19,50 +19,75 @@
         <entry key="..\:/QuanLyQuanCafe/app/src/main/res/layout/activity_toolbar.xml" value="0.23233695652173914" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/add.xml" value="0.2703125" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bacground.xml" value="0.26614583333333336" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/backgrond_hearder.xml" value="0.26614583333333336" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bg_btn_no.xml" value="0.1916729182295574" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bg_btn_yes.xml" value="0.1916729182295574" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bgaddban.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bgduoi.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bggiatien.xml" value="0.2518518518518518" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bgtop.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bobtnlogin.xml" value="0.26205128205128203" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bogo_pin.xml" value="0.26614583333333336" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bogoc.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bogoc_addsp.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/bogosan_pham.xml" value="0.2518518518518518" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/custom_edittext.xml" value="0.1916729182295574" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_add.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_back.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.2703125" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_baseline_sms_24.xml" value="0.1043247344461305" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_menu.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_search.xml" value="0.2703125" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.2703125" />
-        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_ban.xml" value="0.264" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_ban.xml" value="0.152" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_ban_thu_ngan.xml" value="0.16216216216216217" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_dktk.xml" value="0.19202898550724637" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_login.xml" value="0.18342391304347827" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main.xml" value="0.23731884057971014" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_activity3_tesst.xml" value="0.16197916666666667" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_add_ban.xml" value="0.2259963768115942" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_ban.xml" value="0.176" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_bep.xml" value="0.18209408194233687" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_dktk.xml" value="0.2418478260869565" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_ql_doanh_thu.xml" value="0.18209408194233687" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_qlsp.xml" value="0.22192028985507245" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_tesst.xml" value="0.23007246376811594" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_main_thu_ngan.xml" value="0.17185128983308043" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_ql_nhan_vien.xml" value="0.21331521739130435" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlban.xml" value="0.176" />
-        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlkv.xml" value="0.245018115942029" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlkv.xml" value="0.14492753623188406" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlphong.xml" value="0.245018115942029" />
-        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlsp.xml" value="0.25" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_qlsp.xml" value="0.2" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_super_qlkv.xml" value="0.19202898550724637" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/activity_thanhtoan.xml" value="0.16799999999999998" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/add_ban.xml" value="0.2259963768115942" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/add_kv.xml" value="0.2259963768115942" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/add_sanpam.xml" value="0.21739130434782608" />
-        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_them_nv.xml" value="0.25" />
-        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_thong_tin_nv.xml" value="0.264" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/background.xml" value="0.1484375" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_add_ban.xml" value="0.18209408194233687" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_giahang.xml" value="0.18209408194233687" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_order.xml" value="0.18209408194233687" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_sms.xml" value="0.24909420289855072" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_sua_nv.xml" value="0.2" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_them_nv.xml" value="0.2" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_thong_tin_nv.xml" value="0.2" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_thongbao.xml" value="0.19429347826086957" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_thongbao_quyen.xml" value="0.18209408194233687" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/dialog_xacnhan.xml" value="0.24909420289855072" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/digalog_dktk.xml" value="0.18209408194233687" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/fragment_first.xml" value="0.245018115942029" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/hearder_menu.xml" value="0.264" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_giohang.xml" value="0.18209408194233687" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_kv.xml" value="0.245018115942029" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_nhan_vien.xml" value="0.21331521739130435" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_nhanvien.xml" value="0.18209408194233687" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_sanpham.xml" value="0.4" />
-        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_thanhtoan.xml" value="0.2418478260869565" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/item_thanhtoan.xml" value="0.2" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/itemban.xml" value="0.2513586956521739" />
-        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/itemlistviewsanpham.xml" value="0.264" />
+        <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/itemlistviewsanpham.xml" value="0.2" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/order.xml" value="0.25" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/tab_all.xml" value="0.22916666666666666" />
         <entry key="..\:/demo/QuanLyQuanCafe/QuanLyQuanCafe/app/src/main/res/layout/tab_coffe.xml" value="0.22916666666666666" />

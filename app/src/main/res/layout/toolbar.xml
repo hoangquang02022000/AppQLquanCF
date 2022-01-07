@@ -12,6 +12,16 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:titleTextColor="@color/white"
                 android:elevation="4dp">
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:textSize="24dp"
+                android:text="Quản Lý Chung"
+                android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
             </androidx.appcompat.widget.Toolbar>
+
 
 </LinearLayout>

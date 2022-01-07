@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main_thuNgan"
+    android:orientation="vertical"
+    android:background="#FFEB3B">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_backgroud">
+        <ImageButton
+            android:id="@+id/txt_tn_thoat"
+            android:layout_width="58dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_back"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:layout_width="253dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="Thu Ngân"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:gravity="center">
+        <GridView
+            android:layout_gravity="center"
+            android:id="@+id/gr_hinhkhv_tn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bglogin"
+            android:minHeight="32dp"
+            android:numColumns="2"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.318" >
+
+        </GridView>
+    </LinearLayout>
+
+
+</LinearLayout>

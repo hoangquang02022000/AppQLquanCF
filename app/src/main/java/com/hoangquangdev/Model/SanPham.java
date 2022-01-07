@@ -3,7 +3,7 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class SanPham implements Serializable {
-    private int maSP;
+    private String maSP;
     private String tenSP;
 
     private int loaiSP;
@@ -13,7 +13,7 @@ public class SanPham implements Serializable {
     public SanPham() {
     }
 
-    public SanPham(int maSP, String tenSP, int loaiSP, Double giaSp, String imgSP) {
+    public SanPham(String maSP, String tenSP, int loaiSP, Double giaSp, String imgSP) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.loaiSP = loaiSP;
@@ -21,11 +21,11 @@ public class SanPham implements Serializable {
         this.imgSP = imgSP;
     }
 
-    public int getMaSP() {
+    public String getMaSP() {
         return maSP;
     }
 
-    public void setMaSP(int maSP) {
+    public void setMaSP(String maSP) {
         this.maSP = maSP;
     }
 

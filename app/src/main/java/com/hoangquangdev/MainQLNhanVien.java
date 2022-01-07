@@ -48,13 +48,14 @@ import java.util.Random;
 
 public class MainQLNhanVien extends Activity {
     ImageButton ibtn_add_nv,ibtn_addnv_thoat,ibtn_order_thoat,txt_nv_thoat;
-    ImageView img_addNV,img_dialog_nv;
-    EditText txt_add_tenNV,txt_add_ns,txt_add_sdt,txt_add_email,txt_add_diachi,txt_add_tk,txt_add_mk;
+    ImageView img_addNV,img_dialog_nv,ibtn_ttnv_thoat;
+    EditText txt_add_tenNV,txt_add_ns,txt_add_sdt,txt_add_email,txt_add_diachi,txt_add_tk,txt_add_mk
+            ,etxt_tenNV,etxt_namSinh,etxt_gioiTinh,etxt_diachi,etxt_phone,etxt_email,etxt_chuVu,etxt_tk,etxt_pass;
     RadioButton rb_quanLy,rb_nhaVien,rb_nam,rb_nu;
-    Button btn_add_nv,btn_del,btn_yes,btn_no;
+    Button btn_add_nv,btn_del,btn_yes,btn_no,btn_sua,btn_Sua_;
     SearchView search;
     ListView listView;
-    TextView txt_tenNV,txt_namSinh,txt_gioiTinh,txt_diachi,txt_phone,etxt_email,txt_chuVu,txt_tk,txt_pass
+    TextView txt_tenNV,txt_namSinh,txt_gioiTinh,txt_diachi,txt_phone,txt_email,txt_chuVu,txt_tk,txt_pass
             ,txt_thongbao;
     int id;
     int id1;
@@ -110,10 +111,11 @@ public class MainQLNhanVien extends Activity {
                 txt_gioiTinh.setText(ds_NhanViens.get(position).getGtinh());
                 txt_diachi.setText(ds_NhanViens.get(position).getDchi());
                 txt_phone.setText(ds_NhanViens.get(position).getPhone());
-                etxt_email.setText(ds_NhanViens.get(position).getEmail());
+                txt_email.setText(ds_NhanViens.get(position).getEmail());
                 txt_chuVu.setText(ds_NhanViens.get(position).getChucvu());
                 txt_tk.setText(ds_NhanViens.get(position).getTaiKhoan());
                 txt_pass.setText(ds_NhanViens.get(position).getMatKhau());
+
 
 
             }
@@ -344,12 +346,13 @@ public class MainQLNhanVien extends Activity {
         txt_gioiTinh =dialog.findViewById(R.id.txt_gioiTinh);
         txt_diachi = dialog.findViewById(R.id.txt_diachi);
         txt_phone = dialog.findViewById(R.id.txt_phone);
-        etxt_email = dialog.findViewById(R.id.etxt_email);
+        txt_email = dialog.findViewById(R.id.txt_email);
         txt_chuVu = dialog.findViewById(R.id.txt_chuVu);
         txt_tk = dialog.findViewById(R.id.txt_tk);
         txt_pass = dialog.findViewById(R.id.txt_pass);
         ibtn_order_thoat = dialog.findViewById(R.id.ibtn_order_thoat);
         btn_del = dialog.findViewById(R.id.btn_del);
+        btn_sua = dialog.findViewById(R.id.btn_sua);
         ibtn_order_thoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -364,9 +367,24 @@ public class MainQLNhanVien extends Activity {
 
             }
         });
+        btn_sua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                opendialog_suathongtin(Gravity.BOTTOM);
+                dialog.dismiss();
+                int i ;
+               for (i= 0 ; i <= ds_NhanViens.size();i++){
+                    if (ds_NhanViens.get(i).getIdnhanVien()==id1){
+                        etxt_tenNV.setText(ds_NhanViens.get(i).getTenNV());
+                    }
+               }
+            }
+        });
 
         dialog.show();
     }
+
     public  void  del(){ ;
         mData.child("NhanVien").orderByChild("idnhanVien").equalTo(id1)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -393,7 +411,7 @@ public class MainQLNhanVien extends Activity {
     private void opendialog_thongbao(int gravity) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_xacnhan);
+        dialog.setContentView(R.layout.dialog_thongbao);
 
         Window window = dialog.getWindow();
         if (window == null) {
@@ -438,4 +456,48 @@ public class MainQLNhanVien extends Activity {
         });
         dialog.show();
     }
+    private void opendialog_suathongtin(int gravity) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_sua_nv);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.gravity = gravity;
+        window.setAttributes(layoutParams);
+
+        if (Gravity.CENTER == gravity) {
+            dialog.setCancelable(true);
+        } else {
+            dialog.setCancelable(false);
+
+        }
+        etxt_tenNV = dialog.findViewById(R.id.etxt_tenNV);
+        etxt_namSinh= dialog.findViewById(R.id.etxt_namSinh);
+        etxt_gioiTinh =  dialog.findViewById(R.id.etxt_gioiTinh);
+        etxt_diachi = dialog.findViewById(R.id.etxt_diachi);
+        etxt_phone = dialog.findViewById(R.id.etxt_phone);
+        etxt_email= dialog.findViewById(R.id.etxt_email);
+        etxt_chuVu= dialog.findViewById(R.id.etxt_chuVu);
+        etxt_tk = dialog.findViewById(R.id.etxt_tk);
+        etxt_pass= dialog.findViewById(R.id.etxt_pass);
+        btn_Sua_ = dialog.findViewById(R.id.btn_Sua_);
+        ibtn_ttnv_thoat = dialog.findViewById(R.id.ibtn_ttnv_thoat);
+        ibtn_ttnv_thoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+
 }

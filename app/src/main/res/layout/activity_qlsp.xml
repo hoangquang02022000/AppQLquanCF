@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainQLSP">
+    tools:context=".MainQLSP"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_backgroud">
 
-        <Button
-            android:id="@+id/trove"
-            android:layout_width="69dp"
+        <ImageButton
+            android:id="@+id/ibtn_trove"
+            android:layout_width="63dp"
             android:layout_height="match_parent"
             android:background="@drawable/ic_back" />
 
@@ -54,6 +55,7 @@
 
 
     <ListView
+        android:layout_margin="20dp"
         android:id="@+id/lv_SP"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

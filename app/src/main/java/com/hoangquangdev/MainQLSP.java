@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,14 +45,15 @@ import java.util.ArrayList;
 
 public class MainQLSP extends Activity {
 
-    ImageButton ibtn_xoa , ibtn_add,ibn_Del;
+    ImageButton  ibtn_add,ibn_Del;
     RadioButton r_c,r_t,r_d;
     int r=0;
-    ImageView img_anh,ibtn_QLSP_xoaSP;
+    ImageView img_anh,ibtn_trove;
     EditText etxt_tenSp,etxt_giaSP;
     SearchView etxt_nhapSP;
-    Button btn_add,btn_yes;
+    Button btn_add,btn_yes,btn_no;
     ListView lv_SP;
+    TextView txt_thongbao;
     ArrayList<SanPham>dsSanPhams=new ArrayList<>();
     QLSP_Adapter adapter;
 
@@ -58,7 +61,9 @@ public class MainQLSP extends Activity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-    int id ;
+    String id="" ;
+    String id_del="";
+    String nameSP="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +80,6 @@ public class MainQLSP extends Activity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham = snapshot.getValue(SanPham.class);
                 dsSanPhams.add(sanPham);
-                id = sanPham.getMaSP();
 //                adapter = new QLSP_Adapter(MainQLSP.this, R.layout.itemlistviewsanpham, dsSanPhams);
                 lv_SP.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -124,17 +128,30 @@ public class MainQLSP extends Activity {
                 return false;
             }
         });
-
+        ibtn_trove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        lv_SP.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                id_del = dsSanPhams.get(position).getMaSP();
+                nameSP =  dsSanPhams.get(position).getTenSP().toString();
+                opendialog_thongbao(Gravity.CENTER);
+                return false;
+            }
+        });
 
     }
 
 
     private void addctroll() {
-        ibtn_xoa = findViewById(R.id.ibtn_QLSP_xoaSP);
         ibtn_add = findViewById(R.id.ibtn_QLSP_addSp);
         lv_SP = findViewById(R.id.lv_SP);
         etxt_nhapSP = findViewById(R.id.etxt_QLSP_nhapSP);
-        ibtn_QLSP_xoaSP = findViewById(R.id.ibtn_QLSP_xoaSP);
+        ibtn_trove = findViewById(R.id.ibtn_trove);
 
     }
 
@@ -230,9 +247,12 @@ public class MainQLSP extends Activity {
                 mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        SanPham sanPham =new SanPham(id+1,etxt_tenSp.getText().toString(),r
+                        long millis=System.currentTimeMillis();
+                        java.sql.Date date=new java.sql.Date(millis);
+                        id = String.valueOf(date);
+                        SanPham sanPham =new SanPham(id+etxt_tenSp.getText().toString(),etxt_tenSp.getText().toString(),r
                                 ,Double.valueOf(etxt_giaSP.getText().toString()),String.valueOf(uri));
-                        mData.child("SanPham").push().setValue(sanPham);
+                        mData.child("SanPham").child(id+etxt_tenSp.getText().toString()).setValue(sanPham);
                         progressDialog.dismiss();
 //                Snackbar.make(findViewById(R.id.center),"Image Uploaded.",Snackbar.LENGTH_LONG).show();
                         Toast.makeText(getApplicationContext(),"Thêm Thành Công",Toast.LENGTH_LONG).show();
@@ -261,7 +281,7 @@ public class MainQLSP extends Activity {
     private void opendialog_thongbao(int gravity) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_xacnhan);
+        dialog.setContentView(R.layout.dialog_thongbao);
 
         Window window = dialog.getWindow();
         if (window == null) {
@@ -282,6 +302,52 @@ public class MainQLSP extends Activity {
 
         }
         btn_yes = dialog.findViewById(R.id.btn_yes);
+        btn_no = dialog.findViewById(R.id.btn_no);
+        txt_thongbao = dialog .findViewById(R.id.txt_thongbao);
+        txt_thongbao.setText("Bạn Có Muốn Xóa "+nameSP);
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+
+        });
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        del();
+                        dialog.dismiss();
+                    }
+                }
+        );
         dialog.show();
+    }
+
+    public void del(){
+        mData.child("SanPham").orderByChild("maSP").equalTo(id_del)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    {
+                        for (DataSnapshot ds : dataSnapshot.getChildren())
+                        {
+                            ds.getRef().removeValue();
+
+                            Toast.makeText(MainQLSP.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            adapter.notifyDataSetChanged();
+                            for (int i =0 ; i<dsSanPhams.size();i++){
+                                if (dsSanPhams.get(i).getMaSP().equals(id_del)){
+                                    dsSanPhams.remove(i);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError)
+                    {
+                        Toast.makeText(MainQLSP.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

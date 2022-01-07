@@ -13,6 +13,21 @@
         android:theme="@style/Theme.QuanLyQuanCafe"
         android:windowSoftInputMode="stateHidden">
         <activity
+            android:name=".Ban_ThuNgan"
+            android:exported="false" />
+        <activity
+            android:name=".Main_thuNgan"
+            android:exported="false" />
+        <activity
+            android:name=".Main_Bep"
+            android:exported="false" />
+        <activity
+            android:name=".Main_QL_DoanhThu"
+            android:exported="false" />
+        <activity
+            android:name=".Super_QLKV"
+            android:exported="true" />
+        <activity
             android:name=".MainQLNhanVien"
             android:exported="true" />
         <activity
@@ -26,9 +41,6 @@
             android:exported="false" />
         <activity
             android:name=".MainQLBan"
-            android:exported="true" />
-        <activity
-            android:name=".MainDKTK"
             android:exported="true" />
         <activity
             android:name=".MainQLKV"

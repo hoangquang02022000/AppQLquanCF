@@ -36,7 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QLSP_Adapter extends ArrayAdapter<SanPham> {
-    DecimalFormat f = new DecimalFormat("##.000");
+    DecimalFormat f = new DecimalFormat("###,###,###");
+
 
     Activity context;
     int resource;
@@ -76,32 +77,6 @@ public class QLSP_Adapter extends ArrayAdapter<SanPham> {
         }else  {
             txt_QLSP_loaiSP.setText("Trà Sữa");
         }
-
-        ImageButton ibtn_Del =  row.findViewById(R.id.ibtn_QLSP_xoaSP);
-
-        ibtn_Del.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                ref.child("SanPham").orderByChild("maSP").equalTo(sanPham.getMaSP())
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-                            {
-                                for (DataSnapshot ds : dataSnapshot.getChildren())
-                                {
-                                    ds.getRef().removeValue();
-                                    Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError)
-                            {
-                                Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }});
         return row;
     }
 }

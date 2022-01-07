@@ -2,6 +2,7 @@ package com.hoangquangdev;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -19,15 +21,19 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.hoangquangdev.Adapter.GioHang_Apdapter;
 import com.hoangquangdev.Adapter.SanPham_Adapter;
 import com.hoangquangdev.Model.Hoadon;
 import com.hoangquangdev.Model.SanPham;
@@ -35,23 +41,31 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class MainBan extends Activity {
 
     TabHost tabHost;
-    GridView gr_all , gr_coffee , gr_milktea , gr_drink ;
+    GridView gr_all, gr_coffree,gr_tea,gr_drink ;
     ArrayList<SanPham> list_all , list_coffee , list_mikltea , list_drink ,list_order;
-    SanPham_Adapter adapter , adapter_coffee ,adapter_milktea , adapter_drink ;
-    Button btn_BackQLB,btn_order_them,btn_order;
-    ImageButton btn_tru ,btn_cong,btn_back,ibtn_check;
-    TextView txt_tong,txt_tenSp,txt_giaSp,txt_tongSP,txt_SL,txt_tongGiaTien,ten_Ban;
+    SanPham_Adapter adapter ;
+    Button btn_order_them,btn_order,btn_order_GioHang;
+    ImageButton btn_tru ,btn_cong,btn_back,btn_BackQLB,ibtn_check,ibtn_order_thoat_gioHang;
+    TextView txt_tong,txt_tenSp,txt_giaSp,txt_tongSP,txt_SL,txt_tongGiaTien,ten_Ban,txt_TongTien;
     ImageView img_sp;
     RadioGroup rb_Gr;
     CheckBox ck_order_topping;
+    String idhd;
+    String idKV;
+    String idBan;
+    Double TongTien=0.000,ttongttien=0.000;
+    ListView lv_gioHang;
+    GioHang_Apdapter apdapter_GioHang;
 
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
 
-    DecimalFormat f = new DecimalFormat("##");
 
     ArrayList<Hoadon> ds_Hoadon = new ArrayList<>();
     Hoadon hd = new Hoadon();
@@ -59,6 +73,7 @@ public class MainBan extends Activity {
 
 
     ///-----------
+    DecimalFormat f = new DecimalFormat("###,###,###");
 
 
 
@@ -67,15 +82,14 @@ public class MainBan extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ban);
 
-        
+        showSP();
         addcontroll();
         addevent();
-        showSP();
 
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("send");
-        String tenBan = bundle.getString("tenBan");
+        String tenBan = bundle.getString("maKV");
         ten_Ban.setText(tenBan);
 
     }
@@ -85,17 +99,27 @@ public class MainBan extends Activity {
         ibtn_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainBan.this,MainThanhToan.class);
-                intent.putExtra("send_data",ds_Hoadon);
-                startActivity(intent);
+//                Intent intent = new Intent(MainBan.this,MainThanhToan.class);
+//                intent.putExtra("send_data",ds_Hoadon);
+//                startActivity(intent);
             }
 
         });
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TongTien();
+                opengioHang(Gravity.BOTTOM);
 
-                mData.child("Order").push().child(String.valueOf(ds_Hoadon));
+                btn_order_GioHang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        oder();
+                        Toast.makeText(MainBan.this, "Order Thành Công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainBan.this,MainQLKV.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
         btn_BackQLB.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +172,7 @@ public class MainBan extends Activity {
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.rb_order_sizeM:
-                                 size = "M" ;
+                                size = "M" ;
                                 break;
                             case R.id.rb_order_sizeL:
                                 size="L";
@@ -166,7 +190,6 @@ public class MainBan extends Activity {
                     }
                 });
                 txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
 
                 //-------------------------------------------------------
 
@@ -176,20 +199,22 @@ public class MainBan extends Activity {
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         Bundle bundle = intent.getBundleExtra("send");
-                        int idKV = bundle.getInt("maKV",100);
-                        int idBan = bundle.getInt("maBan",100);
-                         hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
+                         idKV = bundle.getString("maKV");
+                         idBan = bundle.getString("maBan");
+                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
                                 ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
                                 ,list_all.get(position).getImgSP());
                         ds_Hoadon.add(hd);
-
+                        ttongttien = ttongttien+gia[0];
+                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                        Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
                     }
                 });
 
             }
 
         });
-        gr_coffee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gr_coffree.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -226,7 +251,7 @@ public class MainBan extends Activity {
                     }
                 });
                 txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+//                txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
                 rb_Gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     String size;
                     @Override
@@ -258,12 +283,15 @@ public class MainBan extends Activity {
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         Bundle bundle = intent.getBundleExtra("send");
-                        int idKV = bundle.getInt("maKV",100);
-                        int idBan = bundle.getInt("maBan",100);
-                        hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
+                         idKV = bundle.getString("maKV");
+                         idBan = bundle.getString("maBan");
+                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
                                 ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
                                 ,list_all.get(position).getImgSP());
                         ds_Hoadon.add(hd);
+                        ttongttien = ttongttien+gia[0];
+                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                        Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -292,7 +320,7 @@ public class MainBan extends Activity {
                         gia[0] = gia[0]+tam ;
                         txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
                         txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+//                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
                     }
                 });
                 btn_tru.setOnClickListener(new View.OnClickListener() {
@@ -338,13 +366,15 @@ public class MainBan extends Activity {
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         Bundle bundle = intent.getBundleExtra("send");
-                        int idKV = bundle.getInt("maKV",100);
-                        int idBan = bundle.getInt("maBan",100);
-                        hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
+                         idKV = bundle.getString("maKV");
+                         idBan = bundle.getString("maBan");
+                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
                                 ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
                                 ,list_all.get(position).getImgSP());
                         ds_Hoadon.add(hd);
-
+                        ttongttien = ttongttien+gia[0];
+                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                        Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -352,7 +382,7 @@ public class MainBan extends Activity {
             }
         });
 
-        gr_milktea.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gr_tea.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -422,48 +452,58 @@ public class MainBan extends Activity {
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         Bundle bundle = intent.getBundleExtra("send");
-                        int idKV = bundle.getInt("maKV",100);
-                        int idBan = bundle.getInt("maBan",100);
-                        hd = new Hoadon(1,idKV,idBan,list_all.get(position).getMaSP()
+                         idKV = bundle.getString("maKV");
+                         idBan = bundle.getString("maBan");
+                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
                                 ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
                                 ,list_all.get(position).getImgSP());
                         ds_Hoadon.add(hd);
-
+                        ttongttien = ttongttien+gia[0];
+                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                        Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
                     }
                 });
 
             }
-        });
+                });
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+
             @Override
             public void onTabChanged(String s) {
-                if (s.equalsIgnoreCase("ALL")){
-                    adapter.notifyDataSetChanged();
 
+                if (s.equalsIgnoreCase("ALL")) {
 
+                    adapter = new SanPham_Adapter(MainBan.this, R.layout.item_sanpham, list_all);
+                    gr_all.setAdapter(adapter);
                 }else if (s.equalsIgnoreCase("Coffee")){
-                    adapter_coffee.notifyDataSetChanged();
                     list_coffee.clear();
                     for (int i=0;i<list_all.size();i++){
                         if (list_all.get(i).getLoaiSP()==0){
                             list_coffee.add(list_all.get(i));
                         }
+                        adapter = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_coffee);
+
+                        gr_coffree.setAdapter(adapter);
                     }
                 }else if (s.equalsIgnoreCase("Milk Tea")){
-                    adapter_milktea.notifyDataSetChanged();
                     list_mikltea.clear();
                     for (int i=0;i<list_all.size();i++){
                         if (list_all.get(i).getLoaiSP()==2){
                             list_mikltea.add(list_all.get(i));
                         }
+                        adapter = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_mikltea);
+
+                        gr_tea.setAdapter(adapter);
                     }
                 }else if (s.equalsIgnoreCase("Dirnk")){
-                    adapter_drink.notifyDataSetChanged();
                     list_drink.clear();
                     for (int i=0;i<list_all.size();i++){
                         if (list_all.get(i).getLoaiSP()==1){
                             list_drink.add(list_all.get(i));
                         }
+                        adapter = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_drink);
+
+                        gr_drink.setAdapter(adapter);
                     }
 
                 }
@@ -482,19 +522,10 @@ public class MainBan extends Activity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham = snapshot.getValue(SanPham.class);
                 list_all.add(sanPham);
-
-
-                adapter = new SanPham_Adapter(MainBan.this, R.layout.item_sanpham, list_all);
                 gr_all.setAdapter(adapter);
+                gr_all.deferNotifyDataSetChanged();
 
-                adapter_coffee = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_coffee);
-                gr_coffee.setAdapter(adapter_coffee);
 
-                adapter_milktea = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_mikltea);
-                gr_milktea.setAdapter(adapter_milktea);
-
-                adapter_drink = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_drink);
-                gr_drink.setAdapter(adapter_drink);
 
             }
 
@@ -565,6 +596,51 @@ public class MainBan extends Activity {
                 dialog.cancel();
             }
         });
+        btn_order_them.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void opengioHang(int gravity) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_giahang);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.gravity = gravity;
+        window.setAttributes(layoutParams);
+
+        if (Gravity.BOTTOM == gravity) {
+            dialog.setCancelable(true);
+        } else {
+            dialog.setCancelable(false);
+
+        }
+        lv_gioHang = dialog.findViewById(R.id.lv_gioHang);
+        txt_TongTien = dialog.findViewById(R.id.txt_TongTien);
+        ibtn_order_thoat_gioHang = dialog.findViewById(R.id.ibtn_order_thoat_gioHang);
+        btn_order_GioHang = dialog.findViewById(R.id.btn_order_GioHang);
+        apdapter_GioHang = new GioHang_Apdapter(this,R.layout.item_giohang,ds_Hoadon);
+        lv_gioHang.setAdapter(apdapter_GioHang);
+        ibtn_order_thoat_gioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        txt_TongTien.setText(f.format(TongTien)+" VNĐ");
         dialog.show();
     }
 
@@ -579,10 +655,10 @@ public class MainBan extends Activity {
 
         TabHost.TabSpec tabcoffee;
         tabcoffee = tabHost.newTabSpec("Coffee");
-        tabcoffee.setContent(R.id.tab_coffee);
-        tabcoffee.setIndicator("Coffee");
+        tabcoffee.setContent(R.id.gr_tabcoffee);
+        tabcoffee.setIndicator("Coffee");                           //>>>>>>>> Nãy sửa chỗ này
         tabHost.addTab(tabcoffee);
-
+//
         TabHost.TabSpec tabmilkTea;
         tabmilkTea = tabHost.newTabSpec("Milk Tea");
         tabmilkTea.setContent(R.id.tab_milkTea);
@@ -598,8 +674,8 @@ public class MainBan extends Activity {
 
     private void addcontroll() {
         gr_all = findViewById(R.id.gr_taball);
-        gr_coffee = findViewById(R.id.gr_tabcoffee);
-        gr_milktea = findViewById(R.id.gr_tabmilktea);
+        gr_coffree = findViewById(R.id.gr_tabcoffee);
+        gr_tea = findViewById(R.id.gr_tabmilktea);
         gr_drink = findViewById(R.id.gr_tabdrink);
         txt_tong = findViewById(R.id.txt_tongGiaTien);
         btn_BackQLB =findViewById(R.id.btn_troveQLB);
@@ -608,16 +684,31 @@ public class MainBan extends Activity {
         txt_tongGiaTien = findViewById(R.id.txt_tongGiaTien);
         ibtn_check = findViewById(R.id.ibtn_check);
 
-
+        adapter = new SanPham_Adapter(MainBan.this, R.layout.item_sanpham, list_all);
 
         tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
         crearTab();
+        TongTien();
+    }
+    private void oder(){
+                long millis=System.currentTimeMillis();
+                java.sql.Date date=new java.sql.Date(millis);
+                idhd = String.valueOf(date);
+                Map<String, Object> map = new HashMap<>();
+                map.put(idBan,ds_Hoadon);
+                mData.child("Order").child(idKV).updateChildren(map);
+                Intent intent = getIntent();
+                Bundle bundle = intent.getBundleExtra("send");
+                String idBan = bundle.getString("maBan");
+                Toast.makeText(MainBan.this, "Order thành công", Toast.LENGTH_SHORT).show();
+                mData.child("Ban").child(idBan).child("trangThai").setValue(1);
+    }
+    private void TongTien(){
+        for (int i = 0 ; i<ds_Hoadon.size();i++){
+            TongTien += ds_Hoadon.get(i).getGiaSanpham();
+        }
+
     }
 
 }
-/*
-*       List<Hoadon> = new ArraryList<>(); //id, tensp, sl, gia, size, tongthanhtoan
-*
-*
-* */

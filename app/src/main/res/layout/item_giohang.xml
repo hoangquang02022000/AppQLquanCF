@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp">
+
+    <ImageView
+        android:id="@+id/img_giaHang"
+        android:layout_width="70dp"
+        android:layout_height="98dp" />
+
+    <LinearLayout
+        android:layout_width="186dp"
+        android:layout_height="99dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_tenSP_gioHang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Trà Sữa"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:text="Size : "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/txt_size_giaHang"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:text="M"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:text="Số Lượng : "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/txt_dl_gioHang"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textColor="@color/black" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/giaTien_spGioHang"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#EF0505"
+            android:textStyle="bold"
+            android:text="20.000 VNĐ"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

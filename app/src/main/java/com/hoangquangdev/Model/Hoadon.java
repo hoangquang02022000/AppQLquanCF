@@ -1,13 +1,12 @@
 package com.hoangquangdev.Model;
 
 import java.io.Serializable;
-import java.io.SerializablePermission;
 
 public class Hoadon implements Serializable {
-    private int idHoadon;
-    private int idKV;
-    private int idBan;
-    private int idSanpham;
+    private String idHoadon;
+    private String idKV;
+    private String idBan;
+    private String idSanpham;
     private String tenSampam;
     private String size;
     private String topping;
@@ -18,7 +17,7 @@ public class Hoadon implements Serializable {
     public Hoadon() {
     }
 
-    public Hoadon(int idHoadon, int idKV, int idBan, int idSanpham, String tenSampam, String size, String topping, int soLuong, double giaSanpham, String img) {
+    public Hoadon(String idHoadon, String idKV, String idBan, String idSanpham, String tenSampam, String size, String topping, int soLuong, double giaSanpham, String img) {
         this.idHoadon = idHoadon;
         this.idKV = idKV;
         this.idBan = idBan;
@@ -31,35 +30,35 @@ public class Hoadon implements Serializable {
         this.img = img;
     }
 
-    public int getIdHoadon() {
+    public String getIdHoadon() {
         return idHoadon;
     }
 
-    public void setIdHoadon(int idHoadon) {
+    public void setIdHoadon(String idHoadon) {
         this.idHoadon = idHoadon;
     }
 
-    public int getIdKV() {
+    public String getIdKV() {
         return idKV;
     }
 
-    public void setIdKV(int idKV) {
+    public void setIdKV(String idKV) {
         this.idKV = idKV;
     }
 
-    public int getIdBan() {
+    public String getIdBan() {
         return idBan;
     }
 
-    public void setIdBan(int idBan) {
+    public void setIdBan(String idBan) {
         this.idBan = idBan;
     }
 
-    public int getIdSanpham() {
+    public String getIdSanpham() {
         return idSanpham;
     }
 
-    public void setIdSanpham(int idSanpham) {
+    public void setIdSanpham(String idSanpham) {
         this.idSanpham = idSanpham;
     }
 

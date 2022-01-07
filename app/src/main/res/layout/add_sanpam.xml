@@ -2,9 +2,10 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="420dp"
+    android:layout_height="450dp"
     android:background="@drawable/bogoc_addsp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,59 +32,81 @@
 
             <LinearLayout
                 android:layout_width="137dp"
-                android:layout_height="259dp">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/img_addsp"
-                    android:layout_width="match_parent"
-                    android:layout_height="114dp"
-                    app:srcCompat="@android:drawable/ic_menu_report_image" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bogosan_pham">
+
+                    <ImageView
+                        android:id="@+id/img_addsp"
+                        android:layout_width="118dp"
+                        android:layout_height="114dp"
+                        android:background="@android:drawable/ic_menu_report_image" />
+                </LinearLayout>
             </LinearLayout>
 
 
             <LinearLayout
-                android:layout_width="271dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <EditText
+                    android:layout_marginTop="10dp"
                     android:id="@+id/etxt_addSP_tenSP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Nhập tên Sản Phẩm"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="Tên Sản Phẩm"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:drawablePadding="12dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="@drawable/custom_edittext"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="21dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/custom_edittext"
                         android:id="@+id/etxt_addSP_giaSP"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Gía Sản Phẩm"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="20dp" />
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:hint="Gía"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:drawablePadding="12dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textSize="22dp" />
 
                     <TextView
+                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="VNĐ"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
+                        android:textSize="22dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Loại Sản Phẩm"
+                    android:layout_marginLeft="20dp"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="22dp" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -91,18 +114,24 @@
                     android:layout_marginLeft="40dp">
 
                     <RadioButton
+                        android:shadowColor="@color/black"
+                        android:textColor="@color/black"
                         android:id="@+id/rdio_AddSP_Coffee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Coffee" />
 
                     <RadioButton
+                        android:shadowColor="@color/black"
+                        android:textColor="@color/black"
                         android:id="@+id/rdio_AddSP_drink"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tea Milk" />
 
                     <RadioButton
+                        android:shadowColor="@color/black"
+                        android:textColor="@color/black"
                         android:id="@+id/rdio_Addsp_teamilk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -110,15 +139,22 @@
                 </RadioGroup>
 
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+    <EditText
+        android:layout_width="100dp"
+        android:layout_gravity="center"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:background="@color/white"
+        android:orientation="vertical"
         android:gravity="center">
-
         <Button
             android:id="@+id/btn_addsp"
             android:layout_width="wrap_content"

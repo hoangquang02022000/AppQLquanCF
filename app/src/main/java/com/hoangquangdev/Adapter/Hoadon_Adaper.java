@@ -20,10 +20,10 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class Hoadon_Adaper extends ArrayAdapter<Hoadon> {
-    DecimalFormat f = new DecimalFormat("##");
     Activity context;
     int resource;
     List<Hoadon> objects;
+    DecimalFormat f = new DecimalFormat("###,###,###");
 
     public Hoadon_Adaper(@NonNull Activity context, int resource,  @NonNull List<Hoadon> objects) {
         super(context, resource, objects);
@@ -51,7 +51,7 @@ public class Hoadon_Adaper extends ArrayAdapter<Hoadon> {
         ten.setText(hoadon.getTenSampam());
         size.setText(hoadon.getSize());
         sl.setText(String.valueOf(hoadon.getSoLuong()));
-        gia.setText(f.format(hoadon.getGiaSanpham()));
+        gia.setText(f.format(hoadon.getGiaSanpham())+" VNĐ");
 
         return row;
 

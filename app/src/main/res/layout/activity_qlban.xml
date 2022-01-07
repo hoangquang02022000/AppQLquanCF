@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainQLBan">
+    tools:context=".MainQLBan"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/constraintLayout"
@@ -14,7 +15,7 @@
         android:background="@color/color_backgroud"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_troveKV"
             android:layout_width="53dp"
             android:layout_height="match_parent"
@@ -24,12 +25,12 @@
 
         <TextView
             android:id="@+id/txt_tenKV_QLB"
-            android:layout_width="291dp"
+            android:layout_width="288dp"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Tên Khu Vực"
             android:textColor="@color/white"
-            android:textSize="34sp"
-            android:gravity="center"/>
+            android:textSize="24dp" />
 
         <ImageButton
             android:id="@+id/imgbtn_addBan"
@@ -42,6 +43,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="389dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -64,6 +66,9 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_margin="20dp"
+        android:background="@drawable/bglogin"
+        android:gravity="center"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="217dp"
@@ -77,7 +82,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
+
             android:orientation="vertical">
 
             <ImageView

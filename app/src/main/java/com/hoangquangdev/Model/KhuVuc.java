@@ -3,24 +3,24 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class KhuVuc implements Serializable {
-    protected int maKV;
+    protected String maKV;
     protected String tenKV;
     protected int img;
 
     public KhuVuc() {
     }
 
-    public KhuVuc(int maKV, String tenKV, int img) {
+    public KhuVuc(String maKV, String tenKV, int img) {
         this.maKV = maKV;
         this.tenKV = tenKV;
         this.img = img;
     }
 
-    public int getMaKV() {
+    public String getMaKV() {
         return maKV;
     }
 
-    public void setMaKV(int maKV) {
+    public void setMaKV(String maKV) {
         this.maKV = maKV;
     }
 

@@ -32,7 +32,7 @@
                 android:text="Tên sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="24dp"/>
+                android:textSize="20dp"/>
             <TextView
                 android:id="@+id/txt_giaSP"
                 android:layout_width="wrap_content"

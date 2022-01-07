@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/bgaddban">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:text="Đăng ký tài khoản"
+            android:gravity="center"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/etxt_email"
+            android:layout_width="284dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edittext"
+            android:drawableStart="@drawable/ic_email_24"
+            android:drawablePadding="12dp"
+            android:hint="Email"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="324dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etxt_passdk"
+                android:ems="10"
+                android:layout_width="253dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_edittext"
+                android:drawableStart="@drawable/ic_key"
+                android:drawablePadding="12dp"
+                android:hint="Password"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic__eye_24" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="324dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@id/etxt_phone"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_edittext"
+                android:drawableStart="@drawable/ic_phone_24"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="Number phone"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+        </LinearLayout>
+
+        <EditText
+        android:id="@+id/etxt_fullname"
+        android:layout_width="284dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableStart="@drawable/ic_people_alt_24"
+        android:drawablePadding="12dp"
+        android:hint="Full name"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+    <EditText
+        android:id="@+id/etxt_namqua"
+        android:layout_width="284dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableStart="@drawable/ic_business_24"
+        android:drawablePadding="12dp"
+        android:hint="Tên Quán"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+        <Button
+            android:id="@+id/btn_singup"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bobtnlogin"
+            android:text="Đăng Ký"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="304dp"
+            android:layout_height="61dp"
+            android:textColor="#F30404"
+            android:textSize="16dp"
+            android:textStyle="italic"
+            android:textColorHint="#F30404"
+            android:hint="Lỗi đăng ký!"/>
+    </LinearLayout>
+
+</LinearLayout>

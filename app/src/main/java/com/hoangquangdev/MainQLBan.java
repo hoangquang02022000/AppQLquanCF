@@ -2,7 +2,6 @@ package com.hoangquangdev;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -28,23 +26,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hoangquangdev.Adapter.Ban_Adapter;
 import com.hoangquangdev.Model.Ban;
-import com.hoangquangdev.Model.KhuVuc;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
 
-public class MainQLBan extends AppCompatActivity {
+public class MainQLBan extends Activity {
     GridView gr_hinhB;
     TextView txt_tenBan,txt_tenKV;
-    ImageButton imgbtn_addBan;
-    Button btn_Back;
+    ImageButton imgbtn_addBan,btn_Back;
 
     ArrayList<Ban> dsBan = new ArrayList<>();
     Ban_Adapter ban_adapter;
-
-    int id ;
+    String id = "";
 
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     @Override
@@ -60,7 +57,7 @@ public class MainQLBan extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("send");
-        txt_tenKV.setText(bundle.getString("tenKV"));
+        txt_tenKV.setText("KV - "+bundle.getString("tenKV"));
 
 
 
@@ -84,12 +81,12 @@ public class MainQLBan extends AppCompatActivity {
                 Bundle bundle = new Bundle();
 
                 //
-                bundle.putInt("maKV",dsBan.get(position).getMaKV());
+                bundle.putString("maKV",dsBan.get(position).getMaKV());
                 bundle.putString("tenBan",dsBan.get(position).getTenBan());
-                bundle.putInt("maBan",dsBan.get(position).getMaBan());
+                bundle.putString("maBan",dsBan.get(position).getMaBan());
                 intent.putExtra("send",bundle);
                 startActivity(intent);
-                System.out.println(dsBan.get(position).getMaBan()+dsBan.get(position).getTenBan()+dsBan.get(position).getMaKV());
+//                System.out.println(dsBan.get(position).getMaBan()+dsBan.get(position).getTenBan()+dsBan.get(position).getMaKV());
 
             }
         });
@@ -122,9 +119,28 @@ public class MainQLBan extends AppCompatActivity {
                 Ban ban = dataSnapshot.getValue(Ban.class);
                 id = ban.getMaBan();
                 Intent intent = getIntent();
-                int maKV = intent.getIntExtra("maKV", 100);
-                if (maKV == ban.getMaKV()) {
+                String maKV = intent.getStringExtra("maKV");
+
+                if (maKV.equals(ban.getMaKV())) {
                     dsBan.add(ban);
+                        Collections.sort(dsBan, new Comparator<Ban>() {
+                        @Override
+                        public int compare(Ban sv1, Ban sv2) {
+
+                            if (sv1.getTenBan().charAt(sv1.getTenBan().length() - 2)
+                                    < sv2.getTenBan().charAt(sv2.getTenBan().length() - 2)) {
+                                return - 1;
+                            } else {
+                                if (sv1.getTenBan().charAt(sv1.getTenBan().length() - 2)
+                                        == sv2.getTenBan().charAt(sv2.getTenBan().length() - 2)) {
+                                    return 0;
+                                } else {
+                                    return 1;
+                                }
+                            }
+
+                        }
+                    });
                     gr_hinhB.setAdapter(ban_adapter);
                     ban_adapter.notifyDataSetChanged();
                 }
@@ -154,7 +170,7 @@ public class MainQLBan extends AppCompatActivity {
     private void opendilogadd(int gravity){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.add_ban);
+        dialog.setContentView(R.layout.dialog_add_ban);
 
         Window window = dialog.getWindow();
         if(window == null){
@@ -179,11 +195,12 @@ public class MainQLBan extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                id=id+1;
+                Random random = new Random();
+                int i = 0 + random.nextInt(100);
                 Intent intent = getIntent();
-                int maKV = intent.getIntExtra("maKV", 100);
-                Ban ban = new Ban(maKV,id,etxt_tenBan.getText().toString(),0);
-                mData.child("Ban").push().setValue(ban);
+                String maKV = intent.getStringExtra("maKV");
+                Ban ban = new Ban(maKV,maKV+"-"+etxt_tenBan.getText().toString(),etxt_tenBan.getText().toString(),0);
+                mData.child("Ban").child(maKV+"-"+etxt_tenBan.getText().toString()).setValue(ban);
 
 
                 Toast.makeText(MainQLBan.this, "Them Ban Thanh Cong", Toast.LENGTH_SHORT).show();

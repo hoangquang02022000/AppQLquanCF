@@ -5,29 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainQLNhanVien">
+    tools:context=".MainQLNhanVien"
+    android:background="@color/white">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/color_backgroud"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/txt_nv_thoat"
-                android:layout_width="59dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_back"
-                tools:ignore="SpeakableTextPresentCheck" />
+        <ImageButton
+            android:id="@+id/txt_nv_thoat"
+            android:layout_width="58dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_back"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:gravity="center"
-                android:text="Quản Lý Nhân Viên"
-                android:textColor="@color/white"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="253dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="Quản Lý Nhân Viên"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/ibtn_add_nv"

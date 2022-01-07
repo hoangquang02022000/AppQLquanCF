@@ -2,30 +2,62 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/itemQLKV"
-        android:title="Quản lý khu vực"
-        app:showAsAction="always"
-        />
 
-    <item
-        android:id="@+id/itemQLSP"
-        android:title="Quản Lý Sản Phẩm"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/itemQLNHV"
-        android:title="Quản Lý Nhân Viên"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/itemDanhThu"
-        android:title="Danh Thu"
-        app:showAsAction="never"
-        />
+    <item android:title="Nhân viên">
+        <menu>
+            <item
+                android:id="@+id/itemQLKV"
+                android:icon="@drawable/ic_qlkv"
+                android:title="Quản lý khu vực"
+                app:showAsAction="never"
+                />
+            <item
+                android:title="Bếp"
+                android:id="@+id/itemBep"
+                app:showAsAction="never"
+                android:icon="@drawable/ic_kitchen_24"
+                />
+            <item
+                android:title="Thu ngân"
+                android:icon="@drawable/ic_thungan_24"
+                android:id="@+id/itemthungan"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
 
-    <item
-        android:id="@+id/itemLogOut"
-        android:title="Log Out"
-        app:showAsAction="never"/>
+    <item android:title="Quản lý">
+        <menu>
+            <item
+                android:id="@+id/itemQLSP"
+                android:icon="@drawable/ic_qlsp"
+                android:title="Quản Lý Sản Phẩm"
+                app:showAsAction="never"
+                />
+
+            <item
+                android:id="@+id/itemQLNHV"
+                android:icon="@drawable/ic_qlnv"
+                android:title="Quản Lý Nhân Viên"
+                app:showAsAction="never"
+                />
+            <item
+                android:id="@+id/itemDanhThu"
+                android:title="Danh Thu"
+                app:showAsAction="never"
+                android:icon="@drawable/ic_danhthu_24"
+                />
+            />
+        </menu>
+    </item>
+    <item android:title="Log out">
+        <menu>
+        <item
+            android:icon="@drawable/ic_logout"
+            android:id="@+id/itemLogOut"
+            android:title="Log Out"
+            app:showAsAction="never"/>
+        </menu>
+    </item>
+
+
 </menu>

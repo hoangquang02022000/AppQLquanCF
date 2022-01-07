@@ -75,6 +75,7 @@
                             android:id="@+id/txt_order_giaSp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textSize="20dp"
                             android:text="Gia San Pham"/>
 
@@ -158,17 +159,23 @@
                     android:id="@+id/rb_hr_order"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="120dp">
+                    android:layout_marginLeft="100dp">
 
                     <RadioButton
+                        android:buttonTint="@color/black"
                         android:id="@+id/rb_order_sizeM"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"/>
 
                     <RadioButton
+                        android:buttonTint="@color/black"
                         android:id="@+id/rb_order_sizeL"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"/>
                 </RadioGroup>
             </LinearLayout>
         </LinearLayout>
@@ -186,10 +193,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -204,11 +207,13 @@
                 android:orientation="horizontal">
 
                 <CheckBox
+                    android:buttonTint="@color/black"
                     android:id="@+id/ck_order_topping"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="Thành Đậu Đen"
-                    android:layout_marginLeft="30dp"/>
+                    android:layout_marginLeft="30dp"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,7 +255,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="80dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/bglogin"
+                android:textColor="@color/color_backgroud"
+                android:background="@drawable/bggiatien"
                 android:text="Thêm" />
         </LinearLayout>
     </LinearLayout>

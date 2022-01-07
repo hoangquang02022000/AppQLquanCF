@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class Order_Adapter extends ArrayAdapter<SanPham> {
-    DecimalFormat f = new DecimalFormat("##.000");
+    DecimalFormat f = new DecimalFormat("###,###,###");
     Activity context;
     int resource;
     List<SanPham> objects;
