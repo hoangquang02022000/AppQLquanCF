@@ -190,12 +190,21 @@ public class MainThanhToan extends Activity {
         thanhToan  tttien = (new thanhToan(uniqueKey+"-"+id+"-"+maKV+"-"+tenBan,tongTien,id));
         mData.child("HoaDon").child("ds_Hoandon").child(id).updateChildren(map);
         mData.child("HoaDon").child("TongTien").child(id).child(uniqueKey+id+"-"+maKV+"-"+tenBan).setValue(tttien);
-//        System.out.println("---------"+tien.toString());
         mData.child("Ban").child(idBan).child("trangThai").setValue(0);
         mData.child("Order").child(maKV).child(maKV+"-"+tenBan).removeValue();
         Intent intent = new Intent(MainThanhToan.this,Main_thuNgan.class);
         startActivity(intent);
         Toast.makeText(MainThanhToan.this, "Thanh Toán Thành Công !", Toast.LENGTH_SHORT).show();
+//
+//        thanhToan  tttien = (new thanhToan(uniqueKey+"-"+"2022-01-16"+"-"+maKV+"-"+tenBan,tongTien,id));
+//        mData.child("HoaDon").child("ds_Hoandon").child("2022-01-16").updateChildren(map);
+//        mData.child("HoaDon").child("TongTien").child("2022-01-16").child(uniqueKey+id+"-"+maKV+"-"+tenBan).setValue(tttien);
+////        System.out.println("---------"+tien.toString());
+//        mData.child("Ban").child(idBan).child("trangThai").setValue(0);
+//        mData.child("Order").child(maKV).child(maKV+"-"+tenBan).removeValue();
+//        Intent intent = new Intent(MainThanhToan.this,Main_thuNgan.class);
+//        startActivity(intent);
+//        Toast.makeText(MainThanhToan.this, "Thanh Toán Thành Công !", Toast.LENGTH_SHORT).show();
     }
 
 }

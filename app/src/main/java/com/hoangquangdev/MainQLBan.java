@@ -199,7 +199,7 @@ public class MainQLBan extends Activity {
                 int i = 0 + random.nextInt(100);
                 Intent intent = getIntent();
                 String maKV = intent.getStringExtra("maKV");
-                Ban ban = new Ban(maKV,maKV+"-"+etxt_tenBan.getText().toString(),etxt_tenBan.getText().toString(),0);
+                Ban ban = new Ban(maKV,maKV+"-"+etxt_tenBan.getText().toString(),etxt_tenBan.getText().toString(),0,0);
                 mData.child("Ban").child(maKV+"-"+etxt_tenBan.getText().toString()).setValue(ban);
 
 

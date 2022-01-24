@@ -155,6 +155,12 @@ public class MainQLKV extends Activity implements NavigationView.OnNavigationIte
         }else if (item.getItemId()==R.id.itemthungan){
             Intent intent = new Intent(this,Main_thuNgan.class);
             startActivity(intent);
+        }else if (item.getItemId()==R.id.itemDanhThu){
+            Intent intent = new Intent(this,Main_QL_DoanhThu.class);
+            startActivity(intent);
+        }else if (item.getItemId()==R.id.itemBep){
+            Intent intent = new Intent(this,Main_Bep.class);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

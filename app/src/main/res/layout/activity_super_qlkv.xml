@@ -21,12 +21,6 @@
         android:layout_marginTop="100dp"
         android:orientation="vertical"
         android:gravity="center">
-        <ImageButton
-            android:id="@+id/btn_addkv"
-            android:layout_width="77dp"
-            android:layout_height="66dp"
-            android:layout_marginLeft="160dp"
-            android:background="@drawable/ic_baseline_add_circle_outline_24" />
         <GridView
             android:id="@+id/gr_hinhkhv"
             android:layout_width="match_parent"
@@ -56,8 +50,7 @@
         android:id="@+id/navigation_view">
 
     </com.google.android.material.navigation.NavigationView>
-    <!--        app:headerLayout="@layout/nav_drawer_header_main"-->
-    <!--        app:menu="@menu/" />-->
+/>
 </androidx.drawerlayout.widget.DrawerLayout>
 
 

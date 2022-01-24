@@ -703,6 +703,7 @@ public class MainBan extends Activity {
                 String idBan = bundle.getString("maBan");
                 Toast.makeText(MainBan.this, "Order thành công", Toast.LENGTH_SHORT).show();
                 mData.child("Ban").child(idBan).child("trangThai").setValue(1);
+                mData.child("Ban").child(idBan).child("chek").setValue(1);
     }
     private void TongTien(){
         for (int i = 0 ; i<ds_Hoadon.size();i++){

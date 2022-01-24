@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.hoangquangdev.Adapter.KV_Adapter;
@@ -21,11 +22,20 @@ public class Main_thuNgan extends AppCompatActivity {
     TextView txt_tenKV;
     ArrayList<KhuVuc> dsKhuVuc;
     KV_Adapter kv_adapter;
+    ImageButton ibtn_tn_thoat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_thu_ngan);
+        ibtn_tn_thoat = findViewById(R.id.ibtn_tn_thoat);
+        ibtn_tn_thoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main_thuNgan.this,MainQLKV.class);
+                startActivity(intent);
+            }
+        });
 
         gr_hinhKV = findViewById(R.id.gr_hinhkhv_tn);
         txt_tenKV = findViewById(R.id.txt_tenKV);

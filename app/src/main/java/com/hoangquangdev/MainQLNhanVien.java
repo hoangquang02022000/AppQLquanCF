@@ -48,7 +48,7 @@ import java.util.Random;
 
 public class MainQLNhanVien extends Activity {
     ImageButton ibtn_add_nv,ibtn_addnv_thoat,ibtn_order_thoat,txt_nv_thoat;
-    ImageView img_addNV,img_dialog_nv,ibtn_ttnv_thoat;
+    ImageView img_addNV,img_dialog_nv,ibtn_ttnv_thoat,img_dialog_nv_edit;
     EditText txt_add_tenNV,txt_add_ns,txt_add_sdt,txt_add_email,txt_add_diachi,txt_add_tk,txt_add_mk
             ,etxt_tenNV,etxt_namSinh,etxt_gioiTinh,etxt_diachi,etxt_phone,etxt_email,etxt_chuVu,etxt_tk,etxt_pass;
     RadioButton rb_quanLy,rb_nhaVien,rb_nam,rb_nu;
@@ -57,8 +57,9 @@ public class MainQLNhanVien extends Activity {
     ListView listView;
     TextView txt_tenNV,txt_namSinh,txt_gioiTinh,txt_diachi,txt_phone,txt_email,txt_chuVu,txt_tk,txt_pass
             ,txt_thongbao;
-    int id;
-    int id1;
+    String id;
+    String id1;
+    String img;
 
 
     public Uri imgUri;
@@ -289,10 +290,12 @@ public class MainQLNhanVien extends Activity {
                         mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Random rd = new Random();
-                                        id = 1+rd.nextInt(200);
-                                NhanVien nhanVien = new NhanVien(id,ten,cv,ns,gt,sdt,email,dc,tk,mk,String.valueOf(uri));
-                                mData.child("NhanVien").push().setValue(nhanVien);
+                                long millis=System.currentTimeMillis();
+                                java.sql.Date date=new java.sql.Date(millis);
+                                id = String.valueOf(date);
+
+                                NhanVien nhanVien = new NhanVien(id+ten.substring(ten.lastIndexOf(' ') + 1),ten,cv,ns,gt,sdt,email,dc,tk,mk,String.valueOf(uri));
+                                mData.child("NhanVien").child(id+ten.substring(ten.lastIndexOf(' ') + 1)).setValue(nhanVien);
                                 progressDialog.dismiss();
                                 Toast.makeText(getApplicationContext(),"Thêm Thành Công",Toast.LENGTH_LONG).show();
 //                                System.out.println("-----------"+cv+ns+gt+email+dc+tk+mk);
@@ -370,13 +373,22 @@ public class MainQLNhanVien extends Activity {
         btn_sua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                opendialog_suathongtin(Gravity.BOTTOM);
                 dialog.dismiss();
+                opendialog_suathongtin(Gravity.BOTTOM);
                 int i ;
-               for (i= 0 ; i <= ds_NhanViens.size();i++){
+               for (i= 0 ; i < ds_NhanViens.size();i++){
                     if (ds_NhanViens.get(i).getIdnhanVien()==id1){
+                        img = ds_NhanViens.get(i).getImg();
                         etxt_tenNV.setText(ds_NhanViens.get(i).getTenNV());
+                        etxt_chuVu.setText(ds_NhanViens.get(i).getChucvu());
+                        etxt_diachi.setText(ds_NhanViens.get(i).getDchi());
+                        etxt_email.setText(ds_NhanViens.get(i).getEmail());
+                        etxt_gioiTinh.setText(ds_NhanViens.get(i).getGtinh());
+                        etxt_namSinh.setText(ds_NhanViens.get(i).getNsinh());
+                        etxt_phone.setText(ds_NhanViens.get(i).getPhone());
+                        etxt_tk.setText(ds_NhanViens.get(i).getTaiKhoan());
+                        etxt_pass.setText(ds_NhanViens.get(i).getMatKhau());
+                        Picasso.get().load(ds_NhanViens.get(i).getImg()).into(img_dialog_nv_edit);
                     }
                }
             }
@@ -490,9 +502,23 @@ public class MainQLNhanVien extends Activity {
         etxt_pass= dialog.findViewById(R.id.etxt_pass);
         btn_Sua_ = dialog.findViewById(R.id.btn_Sua_);
         ibtn_ttnv_thoat = dialog.findViewById(R.id.ibtn_ttnv_thoat);
+        img_dialog_nv_edit = dialog.findViewById(R.id.img_dialog_nv_edit);
         ibtn_ttnv_thoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
+            }
+
+        });
+        btn_Sua_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                NhanVien nhanVien = new NhanVien(id,ten,cv,ns,gt,sdt,email,dc,tk,mk,String.valueOf(uri));
+                NhanVien nvs = new NhanVien(id1,etxt_tenNV.getText().toString(),etxt_chuVu.getText().toString(),etxt_namSinh.getText().toString(),
+                        etxt_gioiTinh.getText().toString(),etxt_phone.getText().toString(),etxt_email.getText().toString(),etxt_diachi.getText().toString(),
+                        etxt_tk.getText().toString(),etxt_pass.getText().toString(),img);
+                mData.child("NhanVien").child(id1).setValue(nvs);
+                Toast.makeText(getApplicationContext(),"Cập nhật thông tin thành công !",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
         });

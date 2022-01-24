@@ -7,15 +7,17 @@ public class Ban implements Serializable {
     private String maBan;
     private String tenBan;
     private int trangThai;
+    private int chek ;
 
     public Ban() {
     }
 
-    public Ban(String maKV, String maBan, String tenBan, int trangThai) {
+    public Ban(String maKV, String maBan, String tenBan, int trangThai,int chek) {
         this.maKV = maKV;
         this.maBan = maBan;
         this.tenBan = tenBan;
         this.trangThai = trangThai;
+        this.chek = chek;
     }
 
     public String getMaKV() {
@@ -48,5 +50,13 @@ public class Ban implements Serializable {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public int getChek() {
+        return chek;
+    }
+
+    public void setChek(int chek) {
+        this.chek = chek;
     }
 }

@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
 
     User user = new User();
     ArrayList<User>  ds_user = new ArrayList<>();
+    ArrayList<NhanVien> ds_userNv = new ArrayList<>();
 
 
     @Override
@@ -119,25 +120,65 @@ public class MainActivity extends Activity {
 
             }
         });
+        mData.child("NhanVien").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                NhanVien usernv = snapshot.getValue(NhanVien.class);
+                ds_userNv.add(usernv);
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
     private void funLogin() {
-        for (int i = 0 ; i<ds_user.size();i++){
-            if (etxtTaiKkhan.getText().toString().trim().equals(ds_user.get(i).getEmail()) &&
-                    etxtMatKhau.getText().toString().trim().equals(ds_user.get(i).getPass())&&
-                    0 == ds_user.get(i).getQuyen()){
-                    Intent intent = new Intent(MainActivity.this,MainQLKV.class);
-                    startActivity(intent);
-            }
-            if (etxtTaiKkhan.getText().toString().trim().equals(ds_user.get(i).getEmail()) &&
-                    etxtMatKhau.getText().toString().trim().equals(ds_user.get(i).getPass()) &&
-                    1==ds_user.get(i).getQuyen()){
-                Intent intent = new Intent(MainActivity.this,Super_QLKV.class);
-                startActivity(intent);
-            }
-        }
+        System.out.println("---------------"+ds_userNv.toString());
+        int chek = 0;
+       for (int i =0; i< ds_user.size();i++){
+           if (ds_user.get(i).getEmail().equals(etxtTaiKkhan.getText().toString().trim()) &&
+                   ds_user.get(i).getPass().equals(etxtMatKhau.getText().toString().trim())){
+//               Intent intent = new Intent(MainActivity.this,MainQLKV.class);
+//               startActivity(intent);
+               chek =1;
+           }
+       }
+       for (int i = 0 ; i < ds_userNv.size();i++){
+           if (ds_userNv.get(i).getTaiKhoan().equals(etxtTaiKkhan.getText().toString().trim())&&
+                   ds_userNv.get(i).getMatKhau().equals(etxtMatKhau.getText().toString().trim())){
+               chek = 2;
+           }
+       }
+       if (chek == 1){
+          Intent intent = new Intent(MainActivity.this,MainQLKV.class);
+               startActivity(intent);
+       }
+       else if (chek ==2){
+           Intent intent = new Intent(MainActivity.this,Super_QLKV.class);
+           startActivity(intent);
+       }
+       else {
+           Toast.makeText(MainActivity.this, "Sai Tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+       }
+
     }
 
 

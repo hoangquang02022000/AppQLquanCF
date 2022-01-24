@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Main_Bep">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_backgroud">
         <ImageButton
-            android:id="@+id/txt_bep_thoat"
+            android:id="@+id/ibtn_bep_thoat"
             android:layout_width="58dp"
             android:layout_height="42dp"
             android:layout_marginTop="8dp"
@@ -28,6 +29,94 @@
             android:textStyle="bold" />
 
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Khu Vực :  A1"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+        <GridView
+            android:id="@+id/gr_A1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bglogin"
+            android:minHeight="48dp"
+            android:numColumns="4"
+            android:padding="10dp"
+            tools:ignore="TouchTargetSizeCheck"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Khu Vực :  A2"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+        <GridView
+            android:id="@+id/gr_A2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bglogin"
+            android:minHeight="48dp"
+            android:numColumns="4"
+            android:padding="10dp"
+            tools:ignore="TouchTargetSizeCheck"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Khu Vực :  B1"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+        <GridView
+            android:id="@+id/gr_B1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bglogin"
+            android:minHeight="48dp"
+            android:numColumns="4"
+            android:padding="10dp"
+            tools:ignore="TouchTargetSizeCheck"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Khu Vực :  B2"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+        <GridView
+            android:id="@+id/gr_B2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bglogin"
+            android:minHeight="48dp"
+            android:numColumns="4"
+            android:padding="10dp"
+            tools:ignore="TouchTargetSizeCheck"/>
     </LinearLayout>
 
 </LinearLayout>

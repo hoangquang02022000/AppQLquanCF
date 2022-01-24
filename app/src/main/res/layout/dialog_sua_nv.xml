@@ -36,14 +36,26 @@
             android:background="@color/white">
 
             <LinearLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content">
+                android:layout_height="100dp">
 
-                <ImageView
-                    android:id="@+id/img_dialog_nv"
-                    android:layout_width="match_parent"
-                    android:layout_height="114dp"
-                    app:srcCompat="@android:drawable/ic_menu_report_image" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/img_dialog_nv_edit"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:src="@drawable/bg_avatar" />-->
+                <com.makeramen.roundedimageview.RoundedImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/img_dialog_nv_edit"
+                    android:src="@drawable/bg_avatar"
+                    android:scaleType="fitCenter"
+                    app:riv_corner_radius="10dp"
+                    app:riv_border_width="2dp"
+                    app:riv_border_color="#333333"
+                    app:riv_mutate_background="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
@@ -58,12 +70,13 @@
 
                     <EditText
                         android:id="@+id/etxt_tenNV"
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="match_parent"
                         android:text="Nguyễn Hoàng Quang"
                         android:textColor="@color/black"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,7 +91,7 @@
                         android:text="NS :"
 
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <EditText
                         android:id="@+id/etxt_namSinh"
@@ -87,7 +100,7 @@
                         android:text="02/02/2000"
 
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:layout_width="50dp"
@@ -95,7 +108,8 @@
                         android:layout_marginLeft="20dp"
                         android:text="GT :"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="20dp"
+                        android:gravity="center"/>
 
                     <EditText
                         android:id="@+id/etxt_gioiTinh"
@@ -103,7 +117,7 @@
                         android:layout_height="match_parent"
                         android:text="Nam"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -117,16 +131,16 @@
                         android:layout_height="match_parent"
                         android:text="Địa Chỉ :"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <EditText
                         android:id="@+id/etxt_diachi"
-                        android:layout_width="wrap_content"
+                        android:layout_width="240dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Phước Hiệp , Tuy Phước , Bình Định"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -140,15 +154,16 @@
                         android:layout_height="match_parent"
                         android:text="Phone :"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <EditText
                         android:id="@+id/etxt_phone"
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:text="0961379812"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp"
+                        android:gravity="center"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -162,16 +177,16 @@
                         android:layout_height="match_parent"
                         android:text="Email :"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <EditText
                         android:id="@+id/etxt_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="hoangquanglhu@gmail.com"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -185,16 +200,16 @@
                         android:layout_height="match_parent"
                         android:text="Chức Vụ :"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <EditText
                         android:id="@+id/etxt_chuVu"
-                        android:layout_width="wrap_content"
+                        android:layout_width="180dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Nhân Viên"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -208,16 +223,16 @@
                         android:layout_height="match_parent"
                         android:text="Tài Khoản :"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <EditText
                         android:id="@+id/etxt_tk"
-                        android:layout_width="wrap_content"
+                        android:layout_width="180dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Quang02"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -236,19 +251,19 @@
 
                     <EditText
                         android:id="@+id/etxt_pass"
-                        android:layout_width="112dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="*******"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <ImageButton
                         android:id="@+id/imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_view" />
+                        android:background="@drawable/ic__eye_24" />
 
 
                 </LinearLayout>
@@ -265,8 +280,9 @@
                 android:id="@+id/btn_Sua_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#06A60C"
-                android:text="Sửa" />
+                android:background="@drawable/bg_btn_yes"
+                android:text="Sửa"
+                />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

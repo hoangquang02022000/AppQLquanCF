@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="659dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/bgaddban">
+
+        <TextView
+            android:layout_width="121dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="130dp"
+            android:gravity="center"
+            android:text="Giỏ Hàng"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ibtn_bep_thoat_gioHang"
+            android:layout_width="46dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/ic_close" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <ListView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/lv_gioHang_bep"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bgaddban">
+
+            <Button
+                android:id="@+id/btn_done"
+                android:layout_width="168dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/bggiatien"
+                android:text="Hoàn Thanh"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

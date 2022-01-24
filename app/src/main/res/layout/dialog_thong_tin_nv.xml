@@ -35,13 +35,19 @@
             android:background="@color/white">
             <LinearLayout
                 android:layout_width="100dp"
-                android:layout_height="wrap_content">
-
-                <ImageView
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/img_dialog_nv"
-                    android:layout_width="match_parent"
-                    android:layout_height="114dp"
-                    app:srcCompat="@android:drawable/ic_menu_report_image" />
+                    android:src="@drawable/bg_avatar"
+                    android:scaleType="fitCenter"
+                    app:riv_corner_radius="10dp"
+                    app:riv_border_width="2dp"
+                    app:riv_border_color="#333333"
+                    app:riv_mutate_background="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,11 +59,12 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/txt_tenNV"
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="match_parent"
                         android:text="Nguyễn Hoàng Quang"
                         android:textStyle="bold"
-                        android:textSize="24dp"
+                        android:textSize="20dp"
+                        android:gravity="center"
                         android:textColor="@color/black"/>
                 </LinearLayout>
                 <LinearLayout
@@ -75,10 +82,10 @@
                         android:textSize="18dp" />
                     <TextView
                         android:id="@+id/txt_namSinh"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:text="02/02/2000"
-
+                        android:gravity="center"
                         android:textSize="18dp"
                         android:textColor="@color/black"/>
 
@@ -88,11 +95,12 @@
                         android:layout_marginLeft="2dp"
                         android:text="GT :"
                         android:textColor="@color/black"
-                        android:textSize="18dp" />
+                        android:textSize="18dp"
+                        android:gravity="center"/>
 
                     <TextView
                         android:id="@+id/txt_gioiTinh"
-                        android:layout_width="78dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:text="Nam"
                         android:textColor="@color/black"
@@ -111,7 +119,7 @@
                         android:textSize="18dp" />
                     <TextView
                         android:id="@+id/txt_diachi"
-                        android:layout_width="wrap_content"
+                        android:layout_width="240dp"
                         android:layout_height="match_parent"
                         android:text="Phước Hiệp , Tuy Phước , Bình Định"
                         android:textColor="@color/black"
@@ -132,7 +140,8 @@
                         android:textSize="18dp" />
                     <TextView
                         android:id="@+id/txt_phone"
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
+                        android:gravity="center"
                         android:layout_height="match_parent"
                         android:text="0961379812"
                         android:textColor="@color/black"
@@ -152,7 +161,7 @@
                         android:textSize="18dp" />
                     <TextView
                         android:id="@+id/txt_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="match_parent"
                         android:text="hoangquanglhu@gmail.com"
                         android:textColor="@color/black"
@@ -173,7 +182,7 @@
                         android:textSize="18dp" />
                     <TextView
                         android:id="@+id/txt_chuVu"
-                        android:layout_width="wrap_content"
+                        android:layout_width="180dp"
                         android:layout_height="match_parent"
                         android:text="Nhân Viên"
                         android:textColor="@color/black"
@@ -192,14 +201,15 @@
                         android:text="Tài Khoản :"
                         android:textColor="@color/black"
                         android:textSize="18dp" />
+
                     <TextView
                         android:id="@+id/txt_tk"
-                        android:layout_width="wrap_content"
+                        android:layout_width="177dp"
                         android:layout_height="match_parent"
+                        android:gravity="center"
                         android:text="Quang02"
                         android:textColor="@color/black"
-                        android:gravity="center"
-                        android:textSize="18dp"/>
+                        android:textSize="18dp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -212,12 +222,13 @@
                         android:layout_height="wrap_content"
                         android:text="Mật Khẩu :"
                         android:gravity="center"
+
                         android:textColor="@color/black"
                         android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/txt_pass"
-                        android:layout_width="112dp"
+                        android:layout_width="163dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="*******"
@@ -229,7 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_menu_view" />
+                        android:background="@drawable/ic__eye_24" />
 
 
             </LinearLayout>
@@ -246,7 +257,7 @@
                     android:id="@+id/btn_del"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#FA0101"
+                    android:background="@drawable/bg_btn_no"
                     android:text="Xóa" />
 
                 <Button
@@ -254,7 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="70dp"
-                    android:background="#06A60C"
+                    android:background="@drawable/bg_btn_yes"
                     android:text="Sửa" />
             </LinearLayout>
     </LinearLayout>

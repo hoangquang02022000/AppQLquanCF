@@ -129,6 +129,13 @@ public class Ban_ThuNgan extends AppCompatActivity {
                 System.out.println("----------"+ds_Ban.get(position).getMaBan());
             }
         });
+        btn_trove_ThuNgan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               finish();
+            }
+        });
     }
 
     private void addcontroll() {

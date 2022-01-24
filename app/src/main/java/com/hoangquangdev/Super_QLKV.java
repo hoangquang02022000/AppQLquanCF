@@ -74,7 +74,7 @@ public class Super_QLKV  extends AppCompatActivity implements  NavigationView.On
         toolbar1 = findViewById(R.id.toolBar);
 
 
-        setSupportActionBar(toolbar1);
+//        setSupportActionBar(toolbar1);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -93,7 +93,6 @@ public class Super_QLKV  extends AppCompatActivity implements  NavigationView.On
         private void addcontroll() {
         gr_hinhKV = findViewById(R.id.gr_hinhkhv);
         txt_tenKV = findViewById(R.id.txt_tenKV);
-        btn_add_kv = findViewById(R.id.btn_addkv);
 
 //        img = findViewById(R.id.img_KVss);
 //        btb_menu = findViewById(R.id.btnMnu);
@@ -129,7 +128,7 @@ public class Super_QLKV  extends AppCompatActivity implements  NavigationView.On
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itemQLKV) {
-        Intent in = new Intent(Super_QLKV.this, MainQLKV.class);
+        Intent in = new Intent(Super_QLKV.this, Super_QLKV.class);
         startActivity(in);
         } else if (item.getItemId() == R.id.itemLogOut) {
             Intent intent = new Intent(this,MainActivity.class);

@@ -3,7 +3,7 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class NhanVien implements Serializable {
-    private int idnhanVien;
+    private String idnhanVien;
     private String tenNV;
     private String chucvu; //0,1,2
     public String nsinh;
@@ -18,7 +18,7 @@ public class NhanVien implements Serializable {
     public NhanVien() {
     }
 
-    public NhanVien(int idnhanVien, String tenNV, String chucvu, String nsinh, String gtinh, String phone, String email, String dchi, String taiKhoan, String matKhau, String img) {
+    public NhanVien(String idnhanVien, String tenNV, String chucvu, String nsinh, String gtinh, String phone, String email, String dchi, String taiKhoan, String matKhau, String img) {
         this.idnhanVien = idnhanVien;
         this.tenNV = tenNV;
         this.chucvu = chucvu;
@@ -32,11 +32,11 @@ public class NhanVien implements Serializable {
         this.img = img;
     }
 
-    public int getIdnhanVien() {
+    public String getIdnhanVien() {
         return idnhanVien;
     }
 
-    public void setIdnhanVien(int idnhanVien) {
+    public void setIdnhanVien(String idnhanVien) {
         this.idnhanVien = idnhanVien;
     }
 
