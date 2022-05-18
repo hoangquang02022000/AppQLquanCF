@@ -61,22 +61,13 @@ public class QLSP_Adapter extends ArrayAdapter<SanPham> {
         //QLSP
         ImageView img_QLSP_imgSP = row.findViewById(R.id.img_QLSP_imgSP);
         TextView txt_QLSP_tenSP = row.findViewById(R.id.txt_QLSP_tenSP);
-        TextView  txt_QLSP_loaiSP = row.findViewById(R.id.txt_QLSP_loaiSP);
+//        TextView  txt_QLSP_loaiSP = row.findViewById(R.id.txt_QLSP_loaiSP);
         TextView txt_QLSP_giaSP = row.findViewById(R.id.txt_QLSP_giaSP);
 
         Picasso.get().load(sanPham.getImgSP()).into(img_QLSP_imgSP);
 
         txt_QLSP_tenSP.setText(sanPham.getTenSP());
         txt_QLSP_giaSP.setText(f.format(sanPham.getGiaSp())+"VNĐ");
-        if (sanPham.getLoaiSP()==0){
-            txt_QLSP_loaiSP.setText("Coffee");
-        }
-        else if (sanPham.getLoaiSP()==1){
-            txt_QLSP_loaiSP.setText("Đóng Chai");
-
-        }else  {
-            txt_QLSP_loaiSP.setText("Trà Sữa");
-        }
         return row;
     }
 }

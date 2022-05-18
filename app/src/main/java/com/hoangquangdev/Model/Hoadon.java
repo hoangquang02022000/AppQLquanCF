@@ -12,12 +12,13 @@ public class Hoadon implements Serializable {
     private String topping;
     private int soLuong;
     private double giaSanpham;
+    private double tongthanhtoan;
     private String img;
 
     public Hoadon() {
     }
 
-    public Hoadon(String idHoadon, String idKV, String idBan, String idSanpham, String tenSampam, String size, String topping, int soLuong, double giaSanpham, String img) {
+    public Hoadon(String idHoadon, String idKV, String idBan, String idSanpham, String tenSampam, String size, String topping, int soLuong, double giaSanpham, String img, double tongthanhtoan) {
         this.idHoadon = idHoadon;
         this.idKV = idKV;
         this.idBan = idBan;
@@ -28,6 +29,15 @@ public class Hoadon implements Serializable {
         this.soLuong = soLuong;
         this.giaSanpham = giaSanpham;
         this.img = img;
+        this.tongthanhtoan =tongthanhtoan;
+    }
+
+    public double getTongthanhtoan() {
+        return tongthanhtoan;
+    }
+
+    public void setTongthanhtoan(double tongthanhtoan) {
+        this.tongthanhtoan = tongthanhtoan;
     }
 
     public String getIdHoadon() {

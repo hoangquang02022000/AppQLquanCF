@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hoangquangdev.Adapter.Ban_Adapter;
 import com.hoangquangdev.Model.Ban;
 
@@ -36,12 +38,12 @@ import java.util.Random;
 
 public class MainQLBan extends Activity {
     GridView gr_hinhB;
-    TextView txt_tenBan,txt_tenKV;
+    TextView txt_tenBan,txt_tenKV,txt_thongbao;
     ImageButton imgbtn_addBan,btn_Back;
-
+    Button btn_yes,btn_no;
     ArrayList<Ban> dsBan = new ArrayList<>();
     Ban_Adapter ban_adapter;
-    String id = "";
+    String thongtinlhu = "tk_mk keySho login";
 
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     @Override
@@ -58,6 +60,7 @@ public class MainQLBan extends Activity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("send");
         txt_tenKV.setText("KV - "+bundle.getString("tenKV"));
+
 
 
 
@@ -90,6 +93,13 @@ public class MainQLBan extends Activity {
 
             }
         });
+        gr_hinhB.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                opendialog_thongbao(Gravity.CENTER,dsBan.get(i).getTenBan(),dsBan.get(i).getMaBan());
+                return true;
+            }
+        });
         btn_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,22 +114,23 @@ public class MainQLBan extends Activity {
         txt_tenKV = findViewById(R.id.txt_tenKV_QLB);
         imgbtn_addBan = findViewById(R.id.imgbtn_addBan);
         btn_Back = findViewById(R.id.btn_troveKV);
-
-
-
-
-
-
     }
     public void showBan(){
-        mData.child("Ban").addChildEventListener(new ChildEventListener() {
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        String email = sharedPreferences.getString("email","");
+        String pass = sharedPreferences.getString("password","");
+        String userShop =sharedPreferences.getString("userShop","");
+        mData.child("UserShop").child(userShop).child("Ban").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 Ban ban = dataSnapshot.getValue(Ban.class);
-                id = ban.getMaBan();
+
+//                id = ban.getMaBan();
                 Intent intent = getIntent();
+
                 String maKV = intent.getStringExtra("maKV");
+
 
                 if (maKV.equals(ban.getMaKV())) {
                     dsBan.add(ban);
@@ -127,12 +138,12 @@ public class MainQLBan extends Activity {
                         @Override
                         public int compare(Ban sv1, Ban sv2) {
 
-                            if (sv1.getTenBan().charAt(sv1.getTenBan().length() - 2)
-                                    < sv2.getTenBan().charAt(sv2.getTenBan().length() - 2)) {
+                            if (sv1.getTenBan().charAt(sv1.getTenBan().length() - 1)
+                                    < sv2.getTenBan().charAt(sv2.getTenBan().length() - 1)) {
                                 return - 1;
                             } else {
-                                if (sv1.getTenBan().charAt(sv1.getTenBan().length() - 2)
-                                        == sv2.getTenBan().charAt(sv2.getTenBan().length() - 2)) {
+                                if (sv1.getTenBan().charAt(sv1.getTenBan().length() - 1)
+                                        == sv2.getTenBan().charAt(sv2.getTenBan().length() - 1)) {
                                     return 0;
                                 } else {
                                     return 1;
@@ -167,7 +178,7 @@ public class MainQLBan extends Activity {
             }
         });
     }
-    private void opendilogadd(int gravity){
+    private void opendilogadd(int gravity ){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_add_ban);
@@ -192,15 +203,15 @@ public class MainQLBan extends Activity {
             }
         EditText etxt_tenBan = dialog.findViewById(R.id.etxt_tenBan);
         Button btn_add = dialog.findViewById(R.id.btn_add);
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        String userShop =sharedPreferences.getString("userShop","");
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random random = new Random();
-                int i = 0 + random.nextInt(100);
                 Intent intent = getIntent();
                 String maKV = intent.getStringExtra("maKV");
                 Ban ban = new Ban(maKV,maKV+"-"+etxt_tenBan.getText().toString(),etxt_tenBan.getText().toString(),0,0);
-                mData.child("Ban").child(maKV+"-"+etxt_tenBan.getText().toString()).setValue(ban);
+                mData.child("UserShop").child(userShop).child("Ban").child(maKV+"-"+etxt_tenBan.getText().toString()).setValue(ban);
 
 
                 Toast.makeText(MainQLBan.this, "Them Ban Thanh Cong", Toast.LENGTH_SHORT).show();
@@ -210,5 +221,74 @@ public class MainQLBan extends Activity {
 
 
         dialog.show();
+    }
+    private void opendialog_thongbao(int gravity , String nd, String id_del) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_thongbao);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.gravity = gravity;
+        window.setAttributes(layoutParams);
+
+        if (Gravity.CENTER == gravity) {
+            dialog.setCancelable(true);
+        } else {
+            dialog.setCancelable(false);
+
+        }
+        btn_yes = dialog.findViewById(R.id.btn_yes);
+        btn_no = dialog.findViewById(R.id.btn_no);
+        txt_thongbao = dialog .findViewById(R.id.txt_thongbao);
+        txt_thongbao.setText("Bạn Có Muốn Xóa "+nd);
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+
+        });
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           del(id_del);
+                                           dialog.dismiss();
+                                       }
+                                   }
+        );
+        dialog.show();
+    }
+    public void del(String id_del){
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        String userShop =sharedPreferences.getString("userShop","");
+        mData.child("UserShop").child(userShop).child("Ban").orderByChild("maBan").equalTo(id_del)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    {
+                        for (DataSnapshot ds : dataSnapshot.getChildren())
+                        {
+                            ds.getRef().removeValue();
+
+                            Toast.makeText(MainQLBan.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError)
+                    {
+                        Toast.makeText(MainQLBan.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

@@ -3,18 +3,19 @@ package com.hoangquangdev.Model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private int idUser;
+    private String idUser;
     private String nameUser;
     private String nameShop;
     private String numPhone;
     private String email;
     private String pass;
     private int quyen;
+    private String userShop;
 
     public User() {
     }
 
-    public User(int idUser, String nameUser, String nameShop, String numPhone, String email, String pass, int quyen) {
+    public User(String idUser, String nameUser, String nameShop, String numPhone, String email, String pass, int quyen, String userShop) {
         this.idUser = idUser;
         this.nameUser = nameUser;
         this.nameShop = nameShop;
@@ -22,13 +23,14 @@ public class User implements Serializable {
         this.email = email;
         this.pass = pass;
         this.quyen = quyen;
+        this.userShop = userShop;
     }
 
-    public int getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 
@@ -80,6 +82,14 @@ public class User implements Serializable {
         this.quyen = quyen;
     }
 
+    public String getUserShop() {
+        return userShop;
+    }
+
+    public void setUserShop(String userShop) {
+        this.userShop = userShop;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -90,6 +100,7 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", pass='" + pass + '\'' +
                 ", quyen=" + quyen +
+                ", userShop='" + userShop + '\'' +
                 '}';
     }
 }

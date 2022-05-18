@@ -3,18 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    android:orientation="vertical">
     <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+        android:gravity="center">
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_nv_"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="10dp"
+            app:riv_border_width="1dp"
+            app:riv_border_color="@color/color_backgroud"
+            app:riv_mutate_background="true"
+            android:layout_height="55dp"
+            android:layout_width="45dp"
+            android:background="@drawable/loading"
+            android:layout_marginLeft="10dp"/>
 
-    <ImageView
-        android:id="@+id/img_nv_"
-        android:layout_width="62dp"
-        android:layout_height="77dp"
-
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <TextView
             android:id="@+id/txt_tenNV_"
@@ -23,7 +31,7 @@
             android:gravity="center"
             android:text="Nguyễn Hoàng Quang"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/txt_chuvu"
@@ -32,9 +40,15 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:text="Nhân Viên"
-            android:textSize="18dp"
+            android:textSize="12dp"
             android:textStyle="bold"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/black">
+
+    </TextView>
 </LinearLayout>

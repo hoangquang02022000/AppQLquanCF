@@ -3,12 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="10dp">
     <GridView
         android:id="@+id/gr_tabcoffee"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="4dp"
-        android:numColumns="3"
-        android:padding="10dp"
+        android:numColumns="2"
         tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
 </LinearLayout>

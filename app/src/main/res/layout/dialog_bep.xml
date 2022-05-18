@@ -9,21 +9,26 @@
         android:background="@drawable/bgaddban">
 
         <TextView
-            android:layout_width="121dp"
+            android:layout_width="258dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="130dp"
+            android:layout_marginLeft="50dp"
             android:gravity="center"
             android:text="Giỏ Hàng"
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/ibtn_bep_thoat_gioHang"
-            android:layout_width="46dp"
+        <LinearLayout
+            android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:background="@drawable/ic_close" />
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/ibtn_bep_thoat_gioHang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_close" />
+        </LinearLayout>
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,18 +46,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/bgaddban">
+            android:background="@drawable/bgaddban"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/btn_done"
-                android:layout_width="168dp"
+                android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="120dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/bggiatien"
+                android:background="@drawable/bog_btn_order"
                 android:text="Hoàn Thanh"
-                android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textSize="12dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

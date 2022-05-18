@@ -59,4 +59,15 @@ public class Ban implements Serializable {
     public void setChek(int chek) {
         this.chek = chek;
     }
+
+    @Override
+    public String toString() {
+        return "Ban{" +
+                "maKV='" + maKV + '\'' +
+                ", maBan='" + maBan + '\'' +
+                ", tenBan='" + tenBan + '\'' +
+                ", trangThai=" + trangThai +
+                ", chek=" + chek +
+                '}';
+    }
 }

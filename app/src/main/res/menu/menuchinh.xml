@@ -17,15 +17,11 @@
                 app:showAsAction="never"
                 android:icon="@drawable/ic_kitchen_24"
                 />
-            <item
-                android:title="Thu ngân"
-                android:icon="@drawable/ic_thungan_24"
-                android:id="@+id/itemthungan"
-                app:showAsAction="never"/>
         </menu>
     </item>
 
-    <item android:title="Quản lý">
+    <item android:title="Quản lý"
+        android:id="@+id/quanly">
         <menu>
             <item
                 android:id="@+id/itemQLSP"

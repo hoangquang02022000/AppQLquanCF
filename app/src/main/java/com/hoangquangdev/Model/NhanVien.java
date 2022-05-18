@@ -11,14 +11,13 @@ public class NhanVien implements Serializable {
     public String phone;
     public String email;
     public String dchi;
-    public String taiKhoan;
     public String matKhau;
     public String img;
 
     public NhanVien() {
     }
 
-    public NhanVien(String idnhanVien, String tenNV, String chucvu, String nsinh, String gtinh, String phone, String email, String dchi, String taiKhoan, String matKhau, String img) {
+    public NhanVien(String idnhanVien, String tenNV, String chucvu, String nsinh, String gtinh, String phone, String email, String dchi, String matKhau, String img) {
         this.idnhanVien = idnhanVien;
         this.tenNV = tenNV;
         this.chucvu = chucvu;
@@ -27,7 +26,6 @@ public class NhanVien implements Serializable {
         this.phone = phone;
         this.email = email;
         this.dchi = dchi;
-        this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
         this.img = img;
     }
@@ -96,13 +94,6 @@ public class NhanVien implements Serializable {
         this.dchi = dchi;
     }
 
-    public String getTaiKhoan() {
-        return taiKhoan;
-    }
-
-    public void setTaiKhoan(String taiKhoan) {
-        this.taiKhoan = taiKhoan;
-    }
 
     public String getMatKhau() {
         return matKhau;
@@ -131,7 +122,6 @@ public class NhanVien implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", dchi='" + dchi + '\'' +
-                ", taiKhoan='" + taiKhoan + '\'' +
                 ", matKhau='" + matKhau + '\'' +
                 ", img='" + img + '\'' +
                 '}';

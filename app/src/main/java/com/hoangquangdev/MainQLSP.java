@@ -2,11 +2,13 @@ package com.hoangquangdev;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,22 +43,26 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hoangquangdev.Adapter.QLSP_Adapter;
+import com.hoangquangdev.Model.Ban;
 import com.hoangquangdev.Model.SanPham;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainQLSP extends Activity {
 
-    ImageButton  ibtn_add,ibn_Del;
-    RadioButton r_c,r_t,r_d;
+    ImageButton  ibtn_add,ibn_Del,ibtn_trove;
     int r=0;
-    ImageView img_anh,ibtn_trove;
+    ImageView img_anh;
     EditText etxt_tenSp,etxt_giaSP;
     SearchView etxt_nhapSP;
     Button btn_add,btn_yes,btn_no;
+    Spinner spnCategory_dannhMuc,spn_danhmucthem;
     ListView lv_SP;
     TextView txt_thongbao;
-    ArrayList<SanPham>dsSanPhams=new ArrayList<>();
+    ArrayList<SanPham>dsSanPhams;
+    ArrayList<SanPham> ds_temp;
     QLSP_Adapter adapter;
 
     public Uri imgUri;
@@ -64,26 +72,100 @@ public class MainQLSP extends Activity {
     String id="" ;
     String id_del="";
     String nameSP="";
+
+    String loaiSanPham ;
+    String thongtinlhu = "tk_mk keySho login";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qlsp);
-        addctroll();
-        showSP();
-        addevent();
-        adapter = new QLSP_Adapter(MainQLSP.this, R.layout.itemlistviewsanpham, dsSanPhams);
-        adapter.notifyDataSetChanged();
-    }
-    public void showSP(){
-        mData.child("SanPham").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                SanPham sanPham = snapshot.getValue(SanPham.class);
-                dsSanPhams.add(sanPham);
-//                adapter = new QLSP_Adapter(MainQLSP.this, R.layout.itemlistviewsanpham, dsSanPhams);
-                lv_SP.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
 
+
+        addctroll();
+        addevent();
+        dsSanPhams = getDataSanPham();
+
+
+        spnCategory_dannhMuc = (Spinner) findViewById(R.id.spnCategory);
+        List<String> list = new ArrayList<>();
+        list.add("All");
+        list.add("Coffee");
+        list.add("Milk Tea");
+        list.add("Drink");
+
+        ArrayAdapter<String> adapter_spiner = new ArrayAdapter(this, android.R.layout.simple_spinner_item,list);
+        adapter_spiner.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+
+        spnCategory_dannhMuc.setAdapter(adapter_spiner);
+        spnCategory_dannhMuc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spnCategory_dannhMuc.getSelectedItem().equals("All")){
+                    displayData(dsSanPhams);
+                    ds_temp.clear();
+                }
+                else if (spnCategory_dannhMuc.getSelectedItem().equals("Coffee")){
+                    ds_temp.clear();
+                    for (int t = 0 ; t < dsSanPhams.size();t++){
+                        if(dsSanPhams.get(t).getLoaiSP().equalsIgnoreCase("coffee")){
+                            ds_temp.add(dsSanPhams.get(t));
+                        }
+                    }
+                    displayData(ds_temp);
+                }
+                else if (spnCategory_dannhMuc.getSelectedItem().equals("Milk Tea")){
+                    ds_temp.clear();
+                    for (int t = 0 ; t < dsSanPhams.size();t++){
+                        if(dsSanPhams.get(t).getLoaiSP().equalsIgnoreCase("milk tea")){
+                            ds_temp.add(dsSanPhams.get(t));
+                        }
+                    }
+                    displayData(ds_temp);
+                }
+                else if (spnCategory_dannhMuc.getSelectedItem().equals("Drink")){
+                    ds_temp.clear();
+                    for (int t = 0 ; t < dsSanPhams.size();t++){
+                        if(dsSanPhams.get(t).getLoaiSP().equalsIgnoreCase("drink")){
+                            ds_temp.add(dsSanPhams.get(t));
+                        }
+                    }
+                    displayData(ds_temp);
+                }
+//                adapter = new QLSP_Adapter(MainQLSP.this, R.layout.itemlistviewsanpham,ds_temp);
+//                lv_SP.setAdapter(adapter);
+//                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    public void displayData(ArrayList<SanPham> _list){
+        adapter = new QLSP_Adapter(MainQLSP.this, R.layout.itemlistviewsanpham, _list);
+        lv_SP.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    public ArrayList<SanPham> getDataSanPham(){
+        ArrayList<SanPham> _mList = new ArrayList<>();
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        String email = sharedPreferences.getString("email","");
+        String pass = sharedPreferences.getString("password","");
+        String userShop =sharedPreferences.getString("userShop","");
+        _mList.clear();
+        mData.child("UserShop").child(userShop).child("SanPham").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String s) {
+                SanPham sanPham = snapshot.getValue(SanPham.class);
+                _mList.add(sanPham);
+                displayData(_mList);
             }
 
             @Override
@@ -106,26 +188,15 @@ public class MainQLSP extends Activity {
 
             }
         });
-
+        return _mList;
     }
+
 
     private void addevent() {
         ibtn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openaddSanPham(Gravity.CENTER);
-            }
-        });
-        // chua fix dc
-        etxt_nhapSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
-                return false;
             }
         });
         ibtn_trove.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +210,7 @@ public class MainQLSP extends Activity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 id_del = dsSanPhams.get(position).getMaSP();
                 nameSP =  dsSanPhams.get(position).getTenSP().toString();
+                System.out.println("--------------------"+id_del);
                 opendialog_thongbao(Gravity.CENTER);
                 return false;
             }
@@ -150,8 +222,11 @@ public class MainQLSP extends Activity {
     private void addctroll() {
         ibtn_add = findViewById(R.id.ibtn_QLSP_addSp);
         lv_SP = findViewById(R.id.lv_SP);
-        etxt_nhapSP = findViewById(R.id.etxt_QLSP_nhapSP);
+//        etxt_nhapSP = findViewById(R.id.etxt_QLSP_nhapSP);
         ibtn_trove = findViewById(R.id.ibtn_trove);
+
+        ds_temp = new ArrayList<>();
+        dsSanPhams =new ArrayList<>();
 
     }
 
@@ -183,24 +258,36 @@ public class MainQLSP extends Activity {
         img_anh=dialog.findViewById(R.id.img_addsp);
         etxt_tenSp=dialog.findViewById(R.id.etxt_addSP_tenSP);
         etxt_giaSP=dialog.findViewById(R.id.etxt_addSP_giaSP);
-        r_c = dialog.findViewById(R.id.rdio_AddSP_Coffee);
-        r_d = dialog.findViewById(R.id.rdio_AddSP_drink);
-        r_t = dialog.findViewById(R.id.rdio_Addsp_teamilk);
+        spn_danhmucthem = dialog.findViewById(R.id.spnCategory_danhmucthem);
+        List<String> list = new ArrayList<>();
+        list.add("Coffee");
+        list.add("Milk Tea");
+        list.add("Drink");
+        ArrayAdapter<String> adapter_spiner = new ArrayAdapter(this, android.R.layout.simple_spinner_item,list);
+        adapter_spiner.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+
+        spn_danhmucthem.setAdapter(adapter_spiner);
+        spn_danhmucthem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(MainQLSP.this, spn_danhmucthem.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                loaiSanPham = spn_danhmucthem.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         img_anh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 storage = FirebaseStorage.getInstance();
                 storageReference = storage.getReference();
-                if(r_c.isChecked()){
-                    r =0;
-                }
-                 else if(r_t.isChecked()){
-                    r = 2;
-                }else if (r_d.isChecked()){
-                    r=1;
-                }
                 cloosePicture();
+
             }
 
             private void cloosePicture() {
@@ -215,7 +302,6 @@ public class MainQLSP extends Activity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                uploadPicture();
             }
         });
@@ -236,6 +322,8 @@ public class MainQLSP extends Activity {
     }
 
     private void uploadPicture() {
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        String userShop =sharedPreferences.getString("userShop","");
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Đang Thêm ảnh ....");
         progressDialog.show();
@@ -248,14 +336,17 @@ public class MainQLSP extends Activity {
                     @Override
                     public void onSuccess(Uri uri) {
                         long millis=System.currentTimeMillis();
-                        java.sql.Date date=new java.sql.Date(millis);
+                        Date date=new Date(millis);
                         id = String.valueOf(date);
-                        SanPham sanPham =new SanPham(id+etxt_tenSp.getText().toString(),etxt_tenSp.getText().toString(),r
+                        SanPham sanPham =new SanPham(id+etxt_tenSp.getText().toString(),etxt_tenSp.getText().toString(),loaiSanPham
                                 ,Double.valueOf(etxt_giaSP.getText().toString()),String.valueOf(uri));
-                        mData.child("SanPham").child(id+etxt_tenSp.getText().toString()).setValue(sanPham);
+                        mData.child("UserShop").child(userShop).child("SanPham").child(id+etxt_tenSp.getText().toString()).setValue(sanPham);
                         progressDialog.dismiss();
 //                Snackbar.make(findViewById(R.id.center),"Image Uploaded.",Snackbar.LENGTH_LONG).show();
                         Toast.makeText(getApplicationContext(),"Thêm Thành Công",Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(getIntent());
+
                     }
                 });
 
@@ -324,7 +415,9 @@ public class MainQLSP extends Activity {
     }
 
     public void del(){
-        mData.child("SanPham").orderByChild("maSP").equalTo(id_del)
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        String userShop =sharedPreferences.getString("userShop","");
+        mData.child("UserShop").child(userShop).child("SanPham").orderByChild("maSP").equalTo(id_del)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -334,12 +427,8 @@ public class MainQLSP extends Activity {
                             ds.getRef().removeValue();
 
                             Toast.makeText(MainQLSP.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            adapter.notifyDataSetChanged();
-                            for (int i =0 ; i<dsSanPhams.size();i++){
-                                if (dsSanPhams.get(i).getMaSP().equals(id_del)){
-                                    dsSanPhams.remove(i);
-                                }
-                            }
+                            finish();
+                            startActivity(getIntent());
                         }
                     }
 
@@ -350,4 +439,6 @@ public class MainQLSP extends Activity {
                     }
                 });
     }
+
+
 }

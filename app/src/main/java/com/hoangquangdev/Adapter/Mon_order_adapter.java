@@ -13,19 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hoangquangdev.Model.Hoadon;
+import com.hoangquangdev.Model.Mon_order;
 import com.hoangquangdev.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class Hoadon_Adaper extends ArrayAdapter<Hoadon> {
+public class Mon_order_adapter extends ArrayAdapter<Mon_order> {
     Activity context;
     int resource;
-    List<Hoadon> objects;
+    List<Mon_order> objects;
     DecimalFormat f = new DecimalFormat("###,###,###");
 
-    public Hoadon_Adaper(@NonNull Activity context, int resource,  @NonNull List<Hoadon> objects) {
+    public Mon_order_adapter(@NonNull Activity context, int resource, @NonNull List<Mon_order> objects) {
         super(context, resource, objects);
         this.context=context;
         this.objects=objects;
@@ -40,18 +41,21 @@ public class Hoadon_Adaper extends ArrayAdapter<Hoadon> {
         LayoutInflater inflater = this.context.getLayoutInflater();
         row = inflater.inflate(this.resource,null);
 
-        Hoadon hoadon =this.objects.get(position);
+        Mon_order mon_order =this.objects.get(position);
         ImageView img = row.findViewById(R.id.imgsp_thanhtoan);
         TextView ten = row.findViewById(R.id.txt_tenSP_thanhtoan);
         TextView size = row.findViewById(R.id.txt_size_thanhtoan);
         TextView sl =row.findViewById(R.id.txt_sl_thanhtoan);
         TextView gia = row.findViewById(R.id.txt_gia_thanhtoan);
+        TextView top = row.findViewById(R.id.txt_bep_topping);
 
-        Picasso.get().load(hoadon.getImg()).into(img);
-        ten.setText(hoadon.getTenSampam());
-        size.setText(hoadon.getSize());
-        sl.setText(String.valueOf(hoadon.getSoLuong()));
-        gia.setText(f.format(hoadon.getGiaSanpham())+" VNĐ");
+        Picasso.get().load(mon_order.getImg()).into(img);
+        ten.setText(mon_order.getTen_sp());
+        size.setText(mon_order.getSize());
+        sl.setText(String.valueOf(mon_order.getSluong()));
+        gia.setText(f.format(mon_order.getGia_sp())+" VNĐ");
+
+        top.setText(mon_order.getTopping());
 
         return row;
 

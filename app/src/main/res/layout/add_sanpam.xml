@@ -2,10 +2,9 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="450dp"
+    android:layout_height="360dp"
     android:background="@drawable/bogoc_addsp"
-    android:orientation="vertical"
-    android:layout_margin="20dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,10 +13,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="24dp"
+            android:textSize="15dp"
             android:text="Thêm Sản Phẩm"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:gravity="center"/>
     </LinearLayout>
     <LinearLayout
@@ -28,25 +26,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="@color/white">
+            android:background="@color/white"
+            >
 
             <LinearLayout
                 android:layout_width="137dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/bogosan_pham">
+                    android:gravity="center">
 
-                    <ImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/img_addsp"
-                        android:layout_width="118dp"
-                        android:layout_height="114dp"
-                        android:background="@android:drawable/ic_menu_report_image" />
+                        android:layout_width="110dp"
+                        android:layout_height="86dp"
+                        android:background="@drawable/ic_camera"
+                        android:scaleType="centerCrop"
+                        app:riv_border_color="@color/black"
+                        app:riv_border_width="1dp"
+                        app:riv_corner_radius="10dp"
+                        app:riv_mutate_background="true" />
+
+
                 </LinearLayout>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hình ảnh minh họa"
+                    android:textColor="@color/black"
+                    android:textSize="12dp"
+                    android:textStyle="italic"
+                    />
             </LinearLayout>
 
 
@@ -56,46 +73,46 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:layout_marginTop="10dp"
                     android:id="@+id/etxt_addSP_tenSP"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:hint="Tên Sản Phẩm"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
+                    android:background="@drawable/custom_edittext"
                     android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:hint="Tên Sản Phẩm"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:background="@drawable/custom_edittext"
-                    android:textColor="@color/black"
-                    android:textSize="21dp" />
+                    android:textColor="@color/xam"
+                    android:textColorHint="@color/xam"
+                    android:textSize="12dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <EditText
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/custom_edittext"
                         android:id="@+id/etxt_addSP_giaSP"
                         android:layout_width="120dp"
-                        android:layout_height="50dp"
-                        android:hint="Gía"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:drawablePadding="12dp"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:textSize="22dp" />
+                        android:layout_height="40dp"
+                        android:background="@drawable/custom_edittext"
+                        android:gravity="center"
+                        android:hint="Giá"
+                        android:textColorHint="@color/xam"
+                        android:textSize="12dp" />
 
                     <TextView
-                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:text="VNĐ"
                         android:textColor="@color/black"
-                        android:textSize="22dp"
+                        android:textSize="15dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -106,37 +123,19 @@
                     android:text="Loại Sản Phẩm"
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/black"
-                    android:textSize="22dp" />
+                    android:textSize="12dp" />
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="40dp">
+                <Spinner
 
-                    <RadioButton
-                        android:shadowColor="@color/black"
-                        android:textColor="@color/black"
-                        android:id="@+id/rdio_AddSP_Coffee"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Coffee" />
+                    android:id="@+id/spnCategory_danhmucthem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:outlineAmbientShadowColor="@color/black"
 
-                    <RadioButton
-                        android:shadowColor="@color/black"
-                        android:textColor="@color/black"
-                        android:id="@+id/rdio_AddSP_drink"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Tea Milk" />
+                    />
 
-                    <RadioButton
-                        android:shadowColor="@color/black"
-                        android:textColor="@color/black"
-                        android:id="@+id/rdio_Addsp_teamilk"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Drink" />
-                </RadioGroup>
 
             </LinearLayout>
 
@@ -155,14 +154,15 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:gravity="center">
+
         <Button
             android:id="@+id/btn_addsp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:background="@drawable/bobtnlogin"
             android:text="Thêm"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="12dp" />
     </LinearLayout>
 
 

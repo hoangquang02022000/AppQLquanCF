@@ -12,45 +12,69 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_backgroud">
-
-        <ImageButton
-            android:id="@+id/ibtn_trove"
-            android:layout_width="63dp"
+        <LinearLayout
+            android:layout_width="50dp"
             android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageButton
+            android:id="@+id/ibtn_trove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/ic_back" />
+        </LinearLayout>
+
 
         <TextView
-            android:layout_width="252dp"
+            android:layout_width="257dp"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Quản Lý Sản Phẩm"
             android:textColor="@color/white"
-            android:textSize="24dp"
-            android:gravity="center"/>
-        <ImageButton
-            android:id="@+id/ibtn_QLSP_addSp"
-            android:layout_width="68dp"
-            android:layout_height="61dp"
-            android:background="#02FFFFFF"
-            android:src="@drawable/add"
-            android:layout_marginLeft="20dp"/>
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/ibtn_QLSP_addSp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#02FFFFFF"
+                android:src="@drawable/add" />
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
-        android:background="#C1D1DD">
+        android:background="@color/white">
 
-        <SearchView
-            android:id="@+id/etxt_QLSP_nhapSP"
-            android:layout_width="352dp"
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:hint="Nhập Tên Sản Phẩm"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="20dp" />
-
+            android:text="Doanh mục :"
+            android:textSize="15dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <Spinner
+            android:id="@+id/spnCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
 
 
 

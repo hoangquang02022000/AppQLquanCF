@@ -13,19 +13,10 @@
         android:theme="@style/Theme.QuanLyQuanCafe"
         android:windowSoftInputMode="stateHidden">
         <activity
-            android:name=".Ban_ThuNgan"
-            android:exported="false" />
-        <activity
-            android:name=".Main_thuNgan"
-            android:exported="false" />
-        <activity
             android:name=".Main_Bep"
             android:exported="true" />
         <activity
             android:name=".Main_QL_DoanhThu"
-            android:exported="true" />
-        <activity
-            android:name=".Super_QLKV"
             android:exported="true" />
         <activity
             android:name=".MainQLNhanVien"
@@ -37,19 +28,13 @@
             android:name=".MainBan"
             android:exported="true" />
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
             android:name=".MainQLBan"
             android:exported="true" />
         <activity
             android:name=".MainQLKV"
             android:exported="true" />
         <activity
-            android:name=".MainThanhToan"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Main_Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,82 +2,114 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp">
-
-    <ImageView
-        android:id="@+id/img_giaHang"
-        android:layout_width="70dp"
-        android:layout_height="98dp" />
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
     <LinearLayout
-        android:layout_width="186dp"
-        android:layout_height="99dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txt_tenSP_gioHang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Trà Sữa"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:text="Size : "
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/txt_size_giaHang"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:text="M"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:text="Số Lượng : "
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/txt_dl_gioHang"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:text="1"
-                android:textColor="@color/black" />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="99dp"
-        android:gravity="center">
-        <TextView
-            android:id="@+id/giaTien_spGioHang"
-            android:gravity="center"
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="85dp"
             android:layout_height="match_parent"
-            android:textColor="#EF0505"
-            android:textStyle="bold"
-            android:text="20.000 VNĐ"
-            android:textSize="20dp"/>
+            android:background="@drawable/bg_header_sp"
+            android:gravity="center">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_giaHang"
+                android:layout_width="61dp"
+                android:layout_height="81dp"
+                android:scaleType="centerCrop"
+                app:riv_corner_radius="5dp"
+                android:background="@drawable/loading"
+                app:riv_mutate_background="true" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="136dp"
+            android:layout_height="87dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_tenSP_gioHang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Trà Sữa"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Size : "
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/txt_size_giaHang"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:text="M"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:text="Số Lượng : "
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/txt_dl_gioHang"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/giaTien_spGioHang"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:gravity="center"
+                android:text="20.000 VNĐ"
+                android:textColor="#EF0505"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/xam"/>
 
 
 </LinearLayout>

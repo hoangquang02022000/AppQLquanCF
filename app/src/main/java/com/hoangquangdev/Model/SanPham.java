@@ -6,14 +6,14 @@ public class SanPham implements Serializable {
     private String maSP;
     private String tenSP;
 
-    private int loaiSP;
+    private String loaiSP;
     private Double giaSp;
     private String imgSP;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, int loaiSP, Double giaSp, String imgSP) {
+    public SanPham(String maSP, String tenSP, String loaiSP, Double giaSp, String imgSP) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.loaiSP = loaiSP;
@@ -37,11 +37,11 @@ public class SanPham implements Serializable {
         this.tenSP = tenSP;
     }
 
-    public int getLoaiSP() {
+    public String getLoaiSP() {
         return loaiSP;
     }
 
-    public void setLoaiSP(int loaiSP) {
+    public void setLoaiSP(String loaiSP) {
         this.loaiSP = loaiSP;
     }
 

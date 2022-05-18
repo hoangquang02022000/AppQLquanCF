@@ -7,10 +7,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,13 +23,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,26 +47,29 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hoangquangdev.Adapter.Nhanvien_Adapter;
 import com.hoangquangdev.Model.NhanVien;
+import com.hoangquangdev.Model.User;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class MainQLNhanVien extends Activity {
-    ImageButton ibtn_add_nv,ibtn_addnv_thoat,ibtn_order_thoat,txt_nv_thoat;
+    ImageButton ibtn_add_nv,ibtn_addnv_thoat,ibtn_order_thoat,txt_nv_thoat,btn_del,btn_sua;
     ImageView img_addNV,img_dialog_nv,ibtn_ttnv_thoat,img_dialog_nv_edit;
-    EditText txt_add_tenNV,txt_add_ns,txt_add_sdt,txt_add_email,txt_add_diachi,txt_add_tk,txt_add_mk
-            ,etxt_tenNV,etxt_namSinh,etxt_gioiTinh,etxt_diachi,etxt_phone,etxt_email,etxt_chuVu,etxt_tk,etxt_pass;
+    EditText txt_add_tenNV,txt_add_ns,txt_add_sdt,txt_add_email,txt_add_diachi,txt_add_mk
+            ,etxt_tenNV,etxt_namSinh,etxt_gioiTinh,etxt_diachi,etxt_phone,etxt_chuVu,etxt_tk;
     RadioButton rb_quanLy,rb_nhaVien,rb_nam,rb_nu;
-    Button btn_add_nv,btn_del,btn_yes,btn_no,btn_sua,btn_Sua_;
+    Button btn_add_nv,btn_yes,btn_no,btn_Sua_;
     SearchView search;
     ListView listView;
-    TextView txt_tenNV,txt_namSinh,txt_gioiTinh,txt_diachi,txt_phone,txt_email,txt_chuVu,txt_tk,txt_pass
+    TextView txt_tenNV,txt_namSinh,txt_gioiTinh,txt_diachi,txt_phone,txt_email,txt_chuVu,txt_pass,etxt_pass,etxt_email
             ,txt_thongbao;
     String id;
     String id1;
     String img;
+    ProgressBar progressBar_adnv ;
 
 
     public Uri imgUri;
@@ -72,12 +82,18 @@ public class MainQLNhanVien extends Activity {
     NhanVien nhanVien = new NhanVien();
     List<NhanVien> ds_NhanViens = new ArrayList<>();
     Nhanvien_Adapter adapter_nv  ;
+    private FirebaseAuth auth;
+    String thongtinlhu = "tk_mk keySho login";
+
+    String userShop ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ql_nhan_vien);
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        userShop=sharedPreferences.getString("userShop","");
         show();
         addcontroll();
         addevent();
@@ -114,22 +130,10 @@ public class MainQLNhanVien extends Activity {
                 txt_phone.setText(ds_NhanViens.get(position).getPhone());
                 txt_email.setText(ds_NhanViens.get(position).getEmail());
                 txt_chuVu.setText(ds_NhanViens.get(position).getChucvu());
-                txt_tk.setText(ds_NhanViens.get(position).getTaiKhoan());
                 txt_pass.setText(ds_NhanViens.get(position).getMatKhau());
 
 
 
-            }
-        });
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter_nv.getFilter().filter(s);
-                return false;
             }
         });
     }
@@ -138,10 +142,9 @@ public class MainQLNhanVien extends Activity {
         ibtn_add_nv = findViewById(R.id.ibtn_add_nv);
         listView = findViewById(R.id.lv_nhanVien);
         txt_nv_thoat = findViewById(R.id.txt_nv_thoat);
-        search = findViewById(R.id.search);
     }
     public void show(){
-        mData.child("NhanVien").addChildEventListener(new ChildEventListener() {
+        mData.child("UserShop").child(userShop).child("NhanVien").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     nhanVien = snapshot.getValue(NhanVien.class);
@@ -208,9 +211,9 @@ public class MainQLNhanVien extends Activity {
         txt_add_sdt = dialog.findViewById(R.id.txt_add_sdt);
         txt_add_email = dialog.findViewById(R.id.txt_add_email);
         txt_add_diachi = dialog.findViewById(R.id.txt_add_diachi);
-        txt_add_tk= dialog.findViewById(R.id.txt_add_tk);
         txt_add_mk = dialog.findViewById(R.id.txt_add_mk);
         btn_add_nv = dialog.findViewById(R.id.btn_add_nv);
+        progressBar_adnv =  dialog.findViewById(R.id.progressBar_addnv);
         ibtn_addnv_thoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -240,30 +243,68 @@ public class MainQLNhanVien extends Activity {
                 storageReference = storage.getReference();
                 ten = txt_add_tenNV.getText().toString().trim();
 
-                if (rb_quanLy.isChecked()){
+                if (rb_quanLy.isChecked()) {
                     cv = "Quản Lý";
-                }
-                else if (rb_nhaVien.isChecked()){
+                } else if (rb_nhaVien.isChecked()) {
                     cv = "Nhan Viên";
                 }
 
-                if (rb_nam.isChecked()){
+                if (rb_nam.isChecked()) {
                     gt = "Nam";
-                }
-                else if (rb_nu.isChecked()){
+                } else if (rb_nu.isChecked()) {
                     gt = "Nữ";
                 }
                 ns = txt_add_ns.getText().toString().trim();
                 sdt = txt_add_sdt.getText().toString().trim();
                 email = txt_add_email.getText().toString().trim();
                 dc = txt_add_diachi.getText().toString().trim();
-                tk = txt_add_tk.getText().toString().trim();
                 mk = txt_add_mk.getText().toString().trim();
 
-                uploadPicture();
+
+                auth = FirebaseAuth.getInstance();
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mk)) {
+                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (mk.length() < 6) {
+                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                    return;
 
 
+                }
+                    progressBar_adnv.setVisibility(View.VISIBLE);
+                    //create user
+                    auth.createUserWithEmailAndPassword(email, mk)
+                            .addOnCompleteListener(MainQLNhanVien.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    Toast.makeText(MainQLNhanVien.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+//                                    progressBar_adnvr.setVisibility(View.GONE);
+                                    // If sign in fails, display a message to the user. If sign in succeeds
+                                    // the auth state listener will be notified and logic to handle the
+                                    // signed in user can be handled in the listener.
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(MainQLNhanVien.this, "Authentication failed." + task.getException(),
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+//                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
+
+                                            uploadPicture();
+
+                                        dialog.dismiss();
+                                    }
+                                }
+                            });
             }
+
+
+
         });
         dialog.show();
     }
@@ -291,11 +332,13 @@ public class MainQLNhanVien extends Activity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 long millis=System.currentTimeMillis();
-                                java.sql.Date date=new java.sql.Date(millis);
+                                Date date=new Date(millis);
                                 id = String.valueOf(date);
 
-                                NhanVien nhanVien = new NhanVien(id+ten.substring(ten.lastIndexOf(' ') + 1),ten,cv,ns,gt,sdt,email,dc,tk,mk,String.valueOf(uri));
-                                mData.child("NhanVien").child(id+ten.substring(ten.lastIndexOf(' ') + 1)).setValue(nhanVien);
+                                NhanVien nhanVien = new NhanVien(id+ten.substring(ten.lastIndexOf(' ') + 1),ten,cv,ns,gt,sdt,email,dc,mk,String.valueOf(uri));
+                                User user = new User(id+ten.substring(ten.lastIndexOf(' ') + 1),ten,userShop,sdt,email,mk,1,userShop);
+                                mData.child("UserShop").child(userShop).child("NhanVien").child(id+ten.substring(ten.lastIndexOf(' ') + 1)).setValue(nhanVien);
+                                mData.child("User").child(id+ten.substring(ten.lastIndexOf(' ') + 1)).setValue(user);
                                 progressDialog.dismiss();
                                 Toast.makeText(getApplicationContext(),"Thêm Thành Công",Toast.LENGTH_LONG).show();
 //                                System.out.println("-----------"+cv+ns+gt+email+dc+tk+mk);
@@ -351,7 +394,6 @@ public class MainQLNhanVien extends Activity {
         txt_phone = dialog.findViewById(R.id.txt_phone);
         txt_email = dialog.findViewById(R.id.txt_email);
         txt_chuVu = dialog.findViewById(R.id.txt_chuVu);
-        txt_tk = dialog.findViewById(R.id.txt_tk);
         txt_pass = dialog.findViewById(R.id.txt_pass);
         ibtn_order_thoat = dialog.findViewById(R.id.ibtn_order_thoat);
         btn_del = dialog.findViewById(R.id.btn_del);
@@ -386,7 +428,6 @@ public class MainQLNhanVien extends Activity {
                         etxt_gioiTinh.setText(ds_NhanViens.get(i).getGtinh());
                         etxt_namSinh.setText(ds_NhanViens.get(i).getNsinh());
                         etxt_phone.setText(ds_NhanViens.get(i).getPhone());
-                        etxt_tk.setText(ds_NhanViens.get(i).getTaiKhoan());
                         etxt_pass.setText(ds_NhanViens.get(i).getMatKhau());
                         Picasso.get().load(ds_NhanViens.get(i).getImg()).into(img_dialog_nv_edit);
                     }
@@ -397,8 +438,23 @@ public class MainQLNhanVien extends Activity {
         dialog.show();
     }
 
-    public  void  del(){ ;
-        mData.child("NhanVien").orderByChild("idnhanVien").equalTo(id1)
+    public  void  del(){
+        mData.child("User").orderByChild("idUser").equalTo(id1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren())
+                {
+                    ds.getRef().removeValue();
+                    adapter_nv.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        mData.child("UserShop").child(userShop).child("NhanVien").orderByChild("idnhanVien").equalTo(id1)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -498,7 +554,6 @@ public class MainQLNhanVien extends Activity {
         etxt_phone = dialog.findViewById(R.id.etxt_phone);
         etxt_email= dialog.findViewById(R.id.etxt_email);
         etxt_chuVu= dialog.findViewById(R.id.etxt_chuVu);
-        etxt_tk = dialog.findViewById(R.id.etxt_tk);
         etxt_pass= dialog.findViewById(R.id.etxt_pass);
         btn_Sua_ = dialog.findViewById(R.id.btn_Sua_);
         ibtn_ttnv_thoat = dialog.findViewById(R.id.ibtn_ttnv_thoat);
@@ -513,17 +568,18 @@ public class MainQLNhanVien extends Activity {
         btn_Sua_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                NhanVien nhanVien = new NhanVien(id,ten,cv,ns,gt,sdt,email,dc,tk,mk,String.valueOf(uri));
                 NhanVien nvs = new NhanVien(id1,etxt_tenNV.getText().toString(),etxt_chuVu.getText().toString(),etxt_namSinh.getText().toString(),
-                        etxt_gioiTinh.getText().toString(),etxt_phone.getText().toString(),etxt_email.getText().toString(),etxt_diachi.getText().toString(),
-                        etxt_tk.getText().toString(),etxt_pass.getText().toString(),img);
-                mData.child("NhanVien").child(id1).setValue(nvs);
+                        etxt_gioiTinh.getText().toString(),etxt_phone.getText().toString(),etxt_email.getText().toString(),etxt_diachi.getText().toString(),etxt_pass.getText().toString(),img);
+                mData.child("UserShop").child(userShop).child("NhanVien").child(id1).setValue(nvs);
                 Toast.makeText(getApplicationContext(),"Cập nhật thông tin thành công !",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
+                finish();
+                startActivity(getIntent());
             }
         });
         dialog.show();
     }
+
 
 
 }

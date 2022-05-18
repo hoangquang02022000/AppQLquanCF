@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="659dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/bgaddban">
-
+        android:background="@drawable/bgaddban"
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
-            android:layout_width="121dp"
+            android:layout_width="261dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="130dp"
+            android:layout_marginLeft="50dp"
             android:gravity="center"
             android:text="Giỏ Hàng"
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/ibtn_order_thoat_gioHang"
-            android:layout_width="46dp"
+        <LinearLayout
+            android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:background="@drawable/ic_close" />
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/ibtn_order_thoat_gioHang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_close" />
+        </LinearLayout>
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical">
         <ListView
@@ -40,31 +46,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/bgaddban">
-
-        <TextView
-            android:id="@+id/txt_TongTien"
-            android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:background="@drawable/bgaddban"
+        android:layout_marginBottom="0dp"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:text="0.000 VNĐ"
-            android:textStyle="bold"
-            android:gravity="center" />
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txt_TongTien"
+                android:layout_width="167dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="0.000 VNĐ"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
         <Button
             android:id="@+id/btn_order_GioHang"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="70dp"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Order"
-            android:textColor="@color/white"
-            android:background="@drawable/bggiatien"/>
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/bog_btn_order"
+            android:text="Thanh Toán"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </LinearLayout>

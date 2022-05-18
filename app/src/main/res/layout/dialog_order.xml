@@ -12,21 +12,26 @@
         android:gravity="center">
 
         <TextView
-            android:layout_width="72dp"
+            android:layout_width="261dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="130dp"
+            android:layout_marginLeft="50dp"
             android:gravity="center"
             android:text="Order"
             android:textColor="@color/white"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:textSize="15dp" />
 
-        <ImageButton
-            android:id="@+id/ibtn_order_thoat"
-            android:layout_width="46dp"
+        <LinearLayout
+            android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="88dp"
-            android:background="@drawable/ic_close" />
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/ibtn_order_thoat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_close" />
+        </LinearLayout>
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,71 +43,115 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/white"
-            android:paddingTop="20dp">
+            android:paddingTop="18dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bogosan_pham"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:background="@drawable/bg_header_sp"
                 android:layout_marginLeft="10dp">
-                <ImageView
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:background="@drawable/loading"
                     android:id="@+id/img_oder_SP"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    app:srcCompat="@android:drawable/ic_menu_gallery" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="5dp"
+                    app:riv_mutate_background="true" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/txt_order_tenSP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="Ten San Pham"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
-                    android:layout_marginTop="10dp"/>
-                    <LinearLayout
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="69dp"
+                        android:layout_height="30dp"
+                        android:text="Giá : "
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/txt_order_giaSp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="30dp">
-                        <TextView
-                            android:id="@+id/txt_order_giaSp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="20dp"
-                            android:text="Gia San Pham"/>
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Gia San Pham"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Số Lượng: "
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center">
 
                         <ImageButton
                             android:id="@+id/ibtn_order_giam"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/ic_cong"
-                            android:layout_marginLeft="10dp"/>
-                        <TextView
-                            android:id="@+id/txt_order_sl"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="1"
-                            android:textSize="20dp"
-                            android:textColor="@color/black"
-                            android:layout_marginLeft="5dp"
-                            android:textStyle="bold"/>
+                            android:background="@drawable/ic_tru" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/txt_order_sl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center">
+
                         <ImageButton
                             android:id="@+id/ibtn_order_tang"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/ic_tru"
-                            android:layout_marginLeft="5dp"/>
-
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/ic_cong" />
                     </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -125,7 +174,7 @@
                 android:text="Size"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:layout_marginLeft="20dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,7 +182,7 @@
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="30dp">
@@ -143,7 +192,7 @@
                         android:layout_height="42dp"
                         android:text="Size M"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -151,7 +200,7 @@
                         android:layout_marginTop="10dp"
                         android:text="Size L   +15.000 VNĐ"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="15dp" />
                 </LinearLayout>
 
 
@@ -159,6 +208,7 @@
                     android:id="@+id/rb_hr_order"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="100dp">
 
                     <RadioButton
@@ -167,6 +217,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:checked="true"
                         android:textColorHint="@color/black"/>
 
                     <RadioButton
@@ -199,7 +250,7 @@
                 android:text="Topping"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:layout_marginLeft="20dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -218,6 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+10.000 VNĐ"
+                    android:textSize="15dp"
                     android:textColor="@color/black"/>
             </LinearLayout>
 
@@ -246,18 +298,18 @@
                 android:layout_marginTop="20dp"
                 android:text="Gía SanPham"
                 android:textColor="@color/black"
-                android:textSize="24dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_order_them"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:layout_marginLeft="80dp"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/color_backgroud"
                 android:background="@drawable/bggiatien"
-                android:text="Thêm" />
+                android:text="Thêm"
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 

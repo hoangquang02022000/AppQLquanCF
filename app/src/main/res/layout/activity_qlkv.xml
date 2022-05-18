@@ -50,7 +50,7 @@
         app:headerLayout="@layout/hearder_menu"
         app:menu="@menu/menuchinh"
         android:id="@+id/navigation_view"
-        android:background="@drawable/background"
+        android:background="@color/white"
         >
 
     </com.google.android.material.navigation.NavigationView>

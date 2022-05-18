@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -35,7 +36,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hoangquangdev.Adapter.GioHang_Apdapter;
 import com.hoangquangdev.Adapter.SanPham_Adapter;
+import com.hoangquangdev.Model.Detail_Buil;
 import com.hoangquangdev.Model.Hoadon;
+import com.hoangquangdev.Model.Mon_order;
 import com.hoangquangdev.Model.SanPham;
 import com.squareup.picasso.Picasso;
 
@@ -46,7 +49,10 @@ import java.util.Map;
 import java.util.Random;
 
 public class MainBan extends Activity {
-
+    double tongthanhtoan_ = 0 , tong_Buid = 0;
+    String size = "M";
+    String topping = "Không";
+    int sl = 1;
     TabHost tabHost;
     GridView gr_all, gr_coffree,gr_tea,gr_drink ;
     ArrayList<SanPham> list_all , list_coffee , list_mikltea , list_drink ,list_order;
@@ -70,12 +76,14 @@ public class MainBan extends Activity {
     ArrayList<Hoadon> ds_Hoadon = new ArrayList<>();
     Hoadon hd = new Hoadon();
 
+    String thongtinlhu = "tk_mk keySho login";
 
 
     ///-----------
     DecimalFormat f = new DecimalFormat("###,###,###");
 
-
+    ArrayList<Detail_Buil> list_Buill = new ArrayList<>();
+    ArrayList<Mon_order> list_mon = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,27 +97,17 @@ public class MainBan extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("send");
-        String tenBan = bundle.getString("maKV");
+        String tenBan = bundle.getString("tenBan");
         ten_Ban.setText(tenBan);
 
     }
 
     private void addevent() {
         list_order = new ArrayList<>();
-        ibtn_check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(MainBan.this,MainThanhToan.class);
-//                intent.putExtra("send_data",ds_Hoadon);
-//                startActivity(intent);
-            }
-
-        });
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TongTien();
-                opengioHang(Gravity.BOTTOM);
+                opengioHang(Gravity.BOTTOM,tong_Buid);
 
                 btn_order_GioHang.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -131,53 +129,61 @@ public class MainBan extends Activity {
         gr_all.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 openOder(Gravity.BOTTOM);
+                sl = 1;
+                size = "M";
+                topping = "Không";
                 String ten = list_all.get(position).getTenSP();
+                double gia_ = list_all.get(position).getGiaSp();
+
                 final Double[] gia = {list_all.get(position).getGiaSp()};
                 double tam = list_all.get(position).getGiaSp();
                 String img = list_all.get(position).getImgSP();
                 Picasso.get().load(img).into(img_sp);
                 txt_tenSp.setText(ten);
-                txt_giaSp.setText((f.format(gia[0]))+" VNĐ");
+                txt_giaSp.setText((f.format(gia_))+" VNĐ");
+                txt_tongSP.setText((f.format(gia_))+" VNĐ");
+                tongthanhtoan_=gia_;
 
-                final int[] sl = {1};
+
+
                 btn_cong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] = sl[0] +1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0] = gia[0]+tam ;
-                        txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
+                        sl+=1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_ += gia_ ;
+                        txt_giaSp.setText(String.valueOf(f.format(list_all.get(position).getGiaSp()))+" VNĐ");
+                        txt_tongSP.setText((f.format(tongthanhtoan_))+" VNĐ");
 
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
 //                        hoadons.add(new Hoadon(1,list_all.get(position).getMaSP(),list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]));
                     }
                 });
                 btn_tru.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] -= 1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0]=gia[0]-tam;
+                        sl -= 1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_-=gia_;
                         txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+//                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
                     }
                 });
                 rb_Gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    String size;
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.rb_order_sizeM:
                                 size = "M" ;
+                                tongthanhtoan_=tongthanhtoan_-15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                                 break;
                             case R.id.rb_order_sizeL:
                                 size="L";
-                                gia[0]=gia[0]+sl[0]*15000;
-                                txt_tongSP.setText(f.format(gia[0])+" VNĐ");
+                                tongthanhtoan_=tongthanhtoan_+15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                         }
                     }
                 });
@@ -185,14 +191,22 @@ public class MainBan extends Activity {
                 ck_order_topping.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gia[0]=gia[0]+sl[0]*10000;
-                        txt_tongSP.setText(f.format(gia[0])+" VNĐ");
+                        if (ck_order_topping.isChecked())
+                        {
+                            topping = "Thạch đậu đen ";
+                            tongthanhtoan_=tongthanhtoan_+10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
+                        else
+                        {
+                            topping = "Không";
+                            tongthanhtoan_=tongthanhtoan_-10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
                     }
                 });
-                txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
 
                 //-------------------------------------------------------
-
 
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -201,101 +215,118 @@ public class MainBan extends Activity {
                         Bundle bundle = intent.getBundleExtra("send");
                          idKV = bundle.getString("maKV");
                          idBan = bundle.getString("maBan");
-                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
-                                ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
-                                ,list_all.get(position).getImgSP());
-                        ds_Hoadon.add(hd);
-                        ttongttien = ttongttien+gia[0];
-                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                         Mon_order mon = new Mon_order(list_all.get(position).getMaSP(),list_all.get(position).getTenSP(),
+                                 list_all.get(position).getImgSP(),sl,tongthanhtoan_,size,topping);
+                        list_mon.add(mon);
+                        tong_Buid += tongthanhtoan_;
+                        txt_tongGiaTien.setText(f.format(tong_Buid)+" VNĐ");
+                        System.out.println("-------------------------------------"+list_mon.toString());
                         Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
+
                     }
                 });
-
             }
 
         });
+
         gr_coffree.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 openOder(Gravity.BOTTOM);
+                sl = 1;
+                size = "M";
+                topping = "Không";
                 String ten = list_coffee.get(position).getTenSP();
+                double gia_ = list_coffee.get(position).getGiaSp();
+
                 final Double[] gia = {list_coffee.get(position).getGiaSp()};
                 String img = list_coffee.get(position).getImgSP();
                 Picasso.get().load(img).into(img_sp);
                 txt_tenSp.setText(ten);
-                txt_giaSp.setText(String.valueOf(gia[0])+"VND");
-                txt_tongSP.setText(String.valueOf(gia[0])+"VND");
-                double tam = list_all.get(position).getGiaSp();
-                final int[] sl = {1};
+                txt_giaSp.setText((f.format(gia_))+" VNĐ");
+                txt_tongSP.setText((f.format(gia_))+" VNĐ");
+                tongthanhtoan_=gia_;
+
+
+
                 btn_cong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] = sl[0] +1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0] = gia[0]+tam ;
-                        txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        sl+=1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_ += gia_ ;
+                        txt_giaSp.setText(String.valueOf(f.format(list_all.get(position).getGiaSp()))+" VNĐ");
+                        txt_tongSP.setText((f.format(tongthanhtoan_))+" VNĐ");
+
+                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
+//                        hoadons.add(new Hoadon(1,list_all.get(position).getMaSP(),list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]));
                     }
                 });
                 btn_tru.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] -= 1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0]=gia[0]-tam;
+                        sl -= 1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_-=gia_;
                         txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+//                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
                     }
                 });
-                txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-//                txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
                 rb_Gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    String size;
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.rb_order_sizeM:
                                 size = "M" ;
+                                tongthanhtoan_=tongthanhtoan_-15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                                 break;
                             case R.id.rb_order_sizeL:
                                 size="L";
-                                gia[0]=gia[0]+sl[0]*15000;
-                                txt_tongSP.setText(f.format(gia[0])+" VNĐ");
+                                tongthanhtoan_=tongthanhtoan_+15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                         }
                     }
                 });
+
                 ck_order_topping.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gia[0]=gia[0]+sl[0]*10000;
-                        txt_tongSP.setText(f.format(gia[0])+" VNĐ");
+                        if (ck_order_topping.isChecked())
+                        {
+                            topping = "Có";
+                            tongthanhtoan_=tongthanhtoan_+10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
+                        else
+                        {
+                            topping = "Không";
+                            tongthanhtoan_=tongthanhtoan_-10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
                     }
                 });
 
-                //--------------------------
-
+                //-------------------------------------------------------
 
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         Bundle bundle = intent.getBundleExtra("send");
-                         idKV = bundle.getString("maKV");
-                         idBan = bundle.getString("maBan");
-                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
-                                ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
-                                ,list_all.get(position).getImgSP());
-                        ds_Hoadon.add(hd);
-                        ttongttien = ttongttien+gia[0];
-                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                        idKV = bundle.getString("maKV");
+                        idBan = bundle.getString("maBan");
+                        Mon_order mon = new Mon_order(list_coffee.get(position).getMaSP(),list_coffee.get(position).getTenSP(),
+                                list_coffee.get(position).getImgSP(),sl,tongthanhtoan_,size,topping);
+                        list_mon.add(mon);
+                        tong_Buid += tongthanhtoan_;
+                        txt_tongGiaTien.setText(f.format(tong_Buid)+" VNĐ");
+                        System.out.println("-------------------------------------"+list_mon.toString());
                         Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
             }
         });
         gr_drink.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -303,82 +334,98 @@ public class MainBan extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 openOder(Gravity.BOTTOM);
+                sl = 1;
+                size = "M";
+                topping = "Không";
                 String ten = list_drink.get(position).getTenSP();
-                final Double[] gia = {list_all.get(position).getGiaSp()};
+                double gia_ = list_drink.get(position).getGiaSp();
+
+                final Double[] gia = {list_drink.get(position).getGiaSp()};
+                double tam = list_drink.get(position).getGiaSp();
                 String img = list_drink.get(position).getImgSP();
                 Picasso.get().load(img).into(img_sp);
                 txt_tenSp.setText(ten);
-                txt_giaSp.setText(String.valueOf(gia[0])+"VND");
-                txt_tongSP.setText(String.valueOf(gia[0])+"VND");
-                double tam = list_all.get(position).getGiaSp();
-                final int[] sl = {1};
+                txt_giaSp.setText((f.format(gia_))+" VNĐ");
+                txt_tongSP.setText((f.format(gia_))+" VNĐ");
+                tongthanhtoan_=gia_;
+
                 btn_cong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] = sl[0] +1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0] = gia[0]+tam ;
-                        txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-//                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        sl+=1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_ += gia_ ;
+                        txt_giaSp.setText(String.valueOf(f.format(list_drink.get(position).getGiaSp()))+" VNĐ");
+                        txt_tongSP.setText((f.format(tongthanhtoan_))+" VNĐ");
+
+                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
+//                        hoadons.add(new Hoadon(1,list_all.get(position).getMaSP(),list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]));
                     }
                 });
                 btn_tru.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] -= 1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0]=gia[0]-tam;
+                        sl -= 1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_-=gia_;
                         txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+//                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
                     }
                 });
-                ck_order_topping.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        gia[0]=gia[0]+sl[0]*10000;
-                        txt_tongSP.setText(f.format(gia[0])+" VNĐ");
-                    }
-                });
-                txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
                 rb_Gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    String size;
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.rb_order_sizeM:
                                 size = "M" ;
+                                tongthanhtoan_=tongthanhtoan_-15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                                 break;
                             case R.id.rb_order_sizeL:
                                 size="L";
-                                gia[0]=gia[0]+sl[0]*15000;
-                                txt_tongSP.setText(f.format(gia[0])+" VNĐ");
+                                tongthanhtoan_=tongthanhtoan_+15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                         }
                     }
                 });
 
-                //-----------------------
+                ck_order_topping.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (ck_order_topping.isChecked())
+                        {
+                            topping = "Thạch đậu đen ";
+                            tongthanhtoan_=tongthanhtoan_+10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
+                        else
+                        {
+                            topping = "Không";
+                            tongthanhtoan_=tongthanhtoan_-10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
+                    }
+                });
+
+                //-------------------------------------------------------
 
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         Bundle bundle = intent.getBundleExtra("send");
-                         idKV = bundle.getString("maKV");
-                         idBan = bundle.getString("maBan");
-                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
-                                ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
-                                ,list_all.get(position).getImgSP());
-                        ds_Hoadon.add(hd);
-                        ttongttien = ttongttien+gia[0];
-                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                        idKV = bundle.getString("maKV");
+                        idBan = bundle.getString("maBan");
+                        Mon_order mon = new Mon_order(list_drink.get(position).getMaSP(),list_drink.get(position).getTenSP(),
+                                list_drink.get(position).getImgSP(),sl,tongthanhtoan_,size,topping);
+                        list_mon.add(mon);
+                        tong_Buid += tongthanhtoan_;
+                        txt_tongGiaTien.setText(f.format(tong_Buid)+" VNĐ");
+                        System.out.println("-------------------------------------"+list_mon.toString());
                         Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
             }
         });
 
@@ -387,85 +434,104 @@ public class MainBan extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 openOder(Gravity.BOTTOM);
+                sl = 1;
+                size = "M";
+                topping = "Không";
                 String ten = list_mikltea.get(position).getTenSP();
+                double gia_ = list_mikltea.get(position).getGiaSp();
+
                 final Double[] gia = {list_mikltea.get(position).getGiaSp()};
+                double tam = list_mikltea.get(position).getGiaSp();
                 String img = list_mikltea.get(position).getImgSP();
                 Picasso.get().load(img).into(img_sp);
                 txt_tenSp.setText(ten);
-                txt_giaSp.setText(String.valueOf(gia[0])+"VND");
-                txt_tongSP.setText(String.valueOf(gia[0])+"VND");
+                txt_giaSp.setText((f.format(gia_))+" VNĐ");
+                txt_tongSP.setText((f.format(gia_))+" VNĐ");
+                tongthanhtoan_=gia_;
 
-                double tam = list_all.get(position).getGiaSp();
-                final int[] sl = {1};
+
+
                 btn_cong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] = sl[0] +1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0] = gia[0]+tam ;
-                        txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        sl+=1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_ += gia_ ;
+                        txt_giaSp.setText(String.valueOf(f.format(list_mikltea.get(position).getGiaSp()))+" VNĐ");
+                        txt_tongSP.setText((f.format(tongthanhtoan_))+" VNĐ");
+
+                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
+//                        hoadons.add(new Hoadon(1,list_all.get(position).getMaSP(),list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]));
                     }
                 });
                 btn_tru.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sl[0] -= 1;
-                        txt_SL.setText(String.valueOf(sl[0]));
-                        gia[0]=gia[0]-tam;
+                        sl -= 1;
+                        txt_SL.setText(String.valueOf(sl));
+                        tongthanhtoan_-=gia_;
                         txt_giaSp.setText(String.valueOf(f.format(gia[0]))+" VNĐ");
-                        txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                        txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
+                        txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+//                        txt_tongGiaTien.setText(f.format(tongthanhtoan_)+" VNĐ");
                     }
                 });
-                txt_tongSP.setText((f.format(gia[0]))+" VNĐ");
-                txt_tongGiaTien.setText(f.format(gia[0])+" VNĐ");
                 rb_Gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    String size;
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.rb_order_sizeM:
                                 size = "M" ;
+                                tongthanhtoan_=tongthanhtoan_-15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                                 break;
                             case R.id.rb_order_sizeL:
                                 size="L";
-                                gia[0]=gia[0]+sl[0]*15000;
-                                txt_tongSP.setText(f.format(gia[0])+" VNĐ");
+                                tongthanhtoan_=tongthanhtoan_+15000.0;
+                                txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
                         }
                     }
                 });
+
                 ck_order_topping.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gia[0]=gia[0]+sl[0]*10000;
-                        txt_tongSP.setText(f.format(gia[0])+" VNĐ");
+                        if (ck_order_topping.isChecked())
+                        {
+                            topping = "Thạch đậu đen ";
+                            tongthanhtoan_=tongthanhtoan_+10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
+                        else
+                        {
+                            topping = "Không";
+                            tongthanhtoan_=tongthanhtoan_-10000.0;
+                            txt_tongSP.setText(f.format(tongthanhtoan_)+" VNĐ");
+                        }
                     }
                 });
 
-                //------------------------------------
-
+                //-------------------------------------------------------
 
                 btn_order_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         Bundle bundle = intent.getBundleExtra("send");
-                         idKV = bundle.getString("maKV");
-                         idBan = bundle.getString("maBan");
-                        hd = new Hoadon(idhd,idKV,idBan,list_all.get(position).getMaSP()
-                                ,list_all.get(position).getTenSP(),"m","có",sl[0],gia[0]
-                                ,list_all.get(position).getImgSP());
-                        ds_Hoadon.add(hd);
-                        ttongttien = ttongttien+gia[0];
-                        txt_tongGiaTien.setText(f.format(ttongttien)+" VNĐ");
+                        idKV = bundle.getString("maKV");
+                        idBan = bundle.getString("maBan");
+                        Mon_order mon = new Mon_order(list_mikltea.get(position).getMaSP(),list_mikltea.get(position).getTenSP(),
+                                list_mikltea.get(position).getImgSP(),sl,tongthanhtoan_,size,topping);
+                        list_mon.add(mon);
+                        tong_Buid += tongthanhtoan_;
+                        txt_tongGiaTien.setText(f.format(tong_Buid)+" VNĐ");
+                        System.out.println("-------------------------------------"+list_mon.toString());
                         Toast.makeText(MainBan.this, "Thêm Vào Giỏ Hàng Thành Công", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
                 });
+
+
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
             @Override
@@ -478,7 +544,7 @@ public class MainBan extends Activity {
                 }else if (s.equalsIgnoreCase("Coffee")){
                     list_coffee.clear();
                     for (int i=0;i<list_all.size();i++){
-                        if (list_all.get(i).getLoaiSP()==0){
+                        if (list_all.get(i).getLoaiSP().equalsIgnoreCase("coffee")){
                             list_coffee.add(list_all.get(i));
                         }
                         adapter = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_coffee);
@@ -488,7 +554,7 @@ public class MainBan extends Activity {
                 }else if (s.equalsIgnoreCase("Milk Tea")){
                     list_mikltea.clear();
                     for (int i=0;i<list_all.size();i++){
-                        if (list_all.get(i).getLoaiSP()==2){
+                        if (list_all.get(i).getLoaiSP().equalsIgnoreCase("milk tea")){
                             list_mikltea.add(list_all.get(i));
                         }
                         adapter = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_mikltea);
@@ -498,7 +564,7 @@ public class MainBan extends Activity {
                 }else if (s.equalsIgnoreCase("Dirnk")){
                     list_drink.clear();
                     for (int i=0;i<list_all.size();i++){
-                        if (list_all.get(i).getLoaiSP()==1){
+                        if (list_all.get(i).getLoaiSP().equalsIgnoreCase("drink")){
                             list_drink.add(list_all.get(i));
                         }
                         adapter = new SanPham_Adapter(MainBan.this,R.layout.item_sanpham,list_drink);
@@ -513,11 +579,15 @@ public class MainBan extends Activity {
 
 
     public void showSP(){
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        String email = sharedPreferences.getString("email","");
+        String pass = sharedPreferences.getString("password","");
+        String userShop =sharedPreferences.getString("userShop","");
         list_all = new ArrayList<>();
         list_coffee = new ArrayList<>();
         list_mikltea = new ArrayList<>();
         list_drink = new ArrayList<>();
-        mData.child("SanPham").addChildEventListener(new ChildEventListener() {
+        mData.child("UserShop").child(userShop).child("SanPham").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham = snapshot.getValue(SanPham.class);
@@ -605,7 +675,7 @@ public class MainBan extends Activity {
         dialog.show();
     }
 
-    private void opengioHang(int gravity) {
+    private void opengioHang(int gravity , Double gia) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_giahang);
@@ -632,15 +702,15 @@ public class MainBan extends Activity {
         txt_TongTien = dialog.findViewById(R.id.txt_TongTien);
         ibtn_order_thoat_gioHang = dialog.findViewById(R.id.ibtn_order_thoat_gioHang);
         btn_order_GioHang = dialog.findViewById(R.id.btn_order_GioHang);
-        apdapter_GioHang = new GioHang_Apdapter(this,R.layout.item_giohang,ds_Hoadon);
+        apdapter_GioHang = new GioHang_Apdapter(this,R.layout.item_giohang,list_mon);
         lv_gioHang.setAdapter(apdapter_GioHang);
+        txt_TongTien.setText((f.format(gia))+" VNĐ");
         ibtn_order_thoat_gioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        txt_TongTien.setText(f.format(TongTien)+" VNĐ");
         dialog.show();
     }
 
@@ -656,7 +726,7 @@ public class MainBan extends Activity {
         TabHost.TabSpec tabcoffee;
         tabcoffee = tabHost.newTabSpec("Coffee");
         tabcoffee.setContent(R.id.gr_tabcoffee);
-        tabcoffee.setIndicator("Coffee");                           //>>>>>>>> Nãy sửa chỗ này
+        tabcoffee.setIndicator("Coffee");
         tabHost.addTab(tabcoffee);
 //
         TabHost.TabSpec tabmilkTea;
@@ -682,34 +752,31 @@ public class MainBan extends Activity {
         btn_order = findViewById(R.id.btn_order);
         ten_Ban = findViewById(R.id.ten_Ban);
         txt_tongGiaTien = findViewById(R.id.txt_tongGiaTien);
-        ibtn_check = findViewById(R.id.ibtn_check);
 
         adapter = new SanPham_Adapter(MainBan.this, R.layout.item_sanpham, list_all);
 
         tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
         crearTab();
-        TongTien();
     }
     private void oder(){
+                Random rand = new Random();
+                int ranNum = rand.nextInt(1000)+1;
+                String thongtinlhu = "tk_mk keySho login";
+                SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+                String userShop =sharedPreferences.getString("userShop","");
                 long millis=System.currentTimeMillis();
                 java.sql.Date date=new java.sql.Date(millis);
-                idhd = String.valueOf(date);
-                Map<String, Object> map = new HashMap<>();
-                map.put(idBan,ds_Hoadon);
-                mData.child("Order").child(idKV).updateChildren(map);
+                Detail_Buil detail_buil = new Detail_Buil(String.valueOf(date),idKV+idBan+String.valueOf(date)+String.valueOf(ranNum),idKV,idBan,list_mon,tong_Buid);
+                mData.child("UserShop").child(userShop).child("HoaDon").child(idKV+idBan+String.valueOf(date)+String.valueOf(ranNum)).setValue(detail_buil);
                 Intent intent = getIntent();
                 Bundle bundle = intent.getBundleExtra("send");
                 String idBan = bundle.getString("maBan");
                 Toast.makeText(MainBan.this, "Order thành công", Toast.LENGTH_SHORT).show();
-                mData.child("Ban").child(idBan).child("trangThai").setValue(1);
-                mData.child("Ban").child(idBan).child("chek").setValue(1);
+                mData.child("UserShop").child(userShop).child("Ban").child(idBan)
+                        .child("trangThai").setValue(1);
     }
-    private void TongTien(){
-        for (int i = 0 ; i<ds_Hoadon.size();i++){
-            TongTien += ds_Hoadon.get(i).getGiaSanpham();
-        }
 
-    }
+
 
 }

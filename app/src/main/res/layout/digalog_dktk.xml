@@ -11,19 +11,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="15dp"
             android:text="Đăng ký tài khoản"
-            android:gravity="center"
-            android:textStyle="bold"/>
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/white">
 
         <EditText
+            android:textColorHint="@color/xam"
             android:id="@+id/etxt_email"
             android:layout_width="284dp"
             android:layout_height="60dp"
@@ -35,7 +35,9 @@
             android:drawablePadding="12dp"
             android:hint="Email"
             android:paddingStart="12dp"
-            android:paddingEnd="12dp" />
+            android:paddingEnd="12dp"
+            android:textColor="@color/xam"
+            android:textSize="12dp"/>
 
         <LinearLayout
             android:layout_width="324dp"
@@ -45,6 +47,9 @@
             android:orientation="horizontal">
 
             <EditText
+                android:textColorHint="@color/xam"
+                android:textColor="@color/xam"
+                android:textSize="12dp"
                 android:id="@+id/etxt_passdk"
                 android:ems="10"
                 android:layout_width="253dp"
@@ -74,6 +79,10 @@
             android:orientation="horizontal">
 
             <EditText
+
+                android:textColorHint="@color/xam"
+                android:textColor="@color/xam"
+                android:textSize="12dp"
                 android:id="@id/etxt_phone"
                 android:layout_width="280dp"
                 android:layout_height="60dp"
@@ -90,11 +99,14 @@
         </LinearLayout>
 
         <EditText
+            android:textColorHint="@color/xam"
+            android:textColor="@color/xam"
+            android:textSize="12dp"
         android:id="@+id/etxt_fullname"
         android:layout_width="284dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/custom_edittext"
         android:drawableStart="@drawable/ic_people_alt_24"
@@ -102,19 +114,49 @@
         android:hint="Full name"
         android:paddingStart="12dp"
         android:paddingEnd="12dp" />
+        <EditText
+            android:textColorHint="@color/xam"
+            android:textColor="@color/xam"
+            android:textSize="12dp"
+            android:id="@+id/etxt_userShop"
+            android:layout_width="284dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edittext"
+            android:drawableStart="@drawable/ic_keyshop"
+            android:drawablePadding="12dp"
+            android:hint="User Shop"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <TextView
+            android:layout_width="268dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="10dp"
+            android:hint="*Lưu ý : Mỗi quán sẽ có 1 user khác nhau nếu như quên thì vui long liên hệ đên : 0961379812"
+            android:textColor="#F30404"
+            android:textColorHint="#F30404"
+            android:textSize="12dp"
+            android:textStyle="italic" />
     <EditText
+        android:textColorHint="@color/xam"
+        android:textColor="@color/xam"
+        android:textSize="12dp"
         android:id="@+id/etxt_namqua"
         android:layout_width="284dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/custom_edittext"
         android:drawableStart="@drawable/ic_business_24"
         android:drawablePadding="12dp"
-        android:hint="Tên Quán"
+        android:hint="Name Shop"
         android:paddingStart="12dp"
         android:paddingEnd="12dp" />
+
         <Button
             android:id="@+id/btn_singup"
             android:layout_width="149dp"
@@ -125,15 +167,13 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_width="304dp"
-            android:layout_height="61dp"
-            android:textColor="#F30404"
-            android:textSize="16dp"
-            android:textStyle="italic"
-            android:textColorHint="#F30404"
-            android:hint="Lỗi đăng ký!"/>
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone" />
 
 </LinearLayout>

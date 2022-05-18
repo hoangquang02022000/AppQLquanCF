@@ -1,17 +1,16 @@
 package com.hoangquangdev;
 
-import static com.hoangquangdev.R.drawable.aa1;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -22,6 +21,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,33 +29,41 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hoangquangdev.Adapter.Ban_Thu_Ngan_Adapter;
-import com.hoangquangdev.Adapter.Hoadon_Adaper;
-import com.hoangquangdev.Adapter.KV_Adapter;
+import com.hoangquangdev.Adapter.Mon_order_adapter;
 import com.hoangquangdev.Model.Ban;
-import com.hoangquangdev.Model.Hoadon;
-import com.hoangquangdev.Model.KhuVuc;
+import com.hoangquangdev.Model.Detail_Buil;
+import com.hoangquangdev.Model.Mon_order;
+import com.hoangquangdev.Model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Main_Bep extends Activity {
+
+    private final String thongtinlhu = "tk_mk keySho login";
     GridView gr_1,gr_2,gr_3,gr_4;
     ListView lv_gioHang_bep;
     TextView txt_tenKV;
     ArrayList<Ban> ds1,ds2,ds3,ds4;
-    ArrayList<Hoadon>hd1,hd2,hd3,hd4;
+    ArrayList<Detail_Buil> hd1 = new ArrayList<>();
+    ArrayList<Detail_Buil> hd2 = new ArrayList<>();
+    ArrayList<Detail_Buil> hd3 = new ArrayList<>();
+    ArrayList<Detail_Buil> hd4 = new ArrayList<>();
     Ban_Thu_Ngan_Adapter adapter1 ,adapter2,adapter3,adapter4;
-    Hoadon_Adaper adhd1,adhd2,adhd3,adhd4;
+    Mon_order_adapter adhd1,adhd2,adhd3,adhd4;
     ImageButton ibtn_tn_thoat,ibtn_bep_thoat_gioHang;
     Button btn_done;
-    String mBAN;
+    String mBAN,userShop;
+    long millis=System.currentTimeMillis();
+     final java.sql.Date date = new java.sql.Date(millis);
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_bep);
         addcontroll();
         getdata();
+//        LoadData();
         addevent();
 
 
@@ -69,6 +77,12 @@ public class Main_Bep extends Activity {
         gr_3 = findViewById(R.id.gr_B1);
         gr_4 = findViewById(R.id.gr_B2);
         ibtn_tn_thoat = findViewById(R.id.ibtn_bep_thoat);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(thongtinlhu,MODE_PRIVATE);
+        userShop =sharedPreferences.getString("userShop","");
+        long millis=System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+
     }
 
     private void addevent() {
@@ -79,23 +93,23 @@ public class Main_Bep extends Activity {
                 startActivity(intent);
             }
         });
-        hd1 = new ArrayList<>();
-        hd2 = new ArrayList<>();
-        hd3 = new ArrayList<>();
-        hd4 = new ArrayList<>();
+
 
         gr_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            mData.child("Order").child("KV-A1").child(ds1.get(position).getMaBan()).addChildEventListener(new ChildEventListener() {
+            mData.child("UserShop").child(userShop).child("HoaDon").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    Hoadon hoadon = snapshot.getValue(Hoadon.class);
-                    hd1.add(hoadon);
+                    Detail_Buil ts = snapshot.getValue(Detail_Buil.class);
+                    hd1.add(ts);
                     mBAN = ds1.get(position).getMaBan();
-                    adhd1 =new Hoadon_Adaper(Main_Bep.this, R.layout.item_thanhtoan,hd1);
-                    lv_gioHang_bep.setAdapter(adhd1);
-                    adhd1.notifyDataSetChanged();
+                        if (ts.getIdBan().equalsIgnoreCase(mBAN)){
+                            adhd1 =new Mon_order_adapter(Main_Bep.this, R.layout.item_giohang_bep,ts.getmList_mon_order());
+                            lv_gioHang_bep.setAdapter(adhd1);
+                            adhd1.notifyDataSetChanged();
+                        }
+
 
                 }
 
@@ -119,6 +133,7 @@ public class Main_Bep extends Activity {
 
                 }
             });
+
             open_dialog_giaHang(Gravity.BOTTOM);
 
         }
@@ -126,15 +141,19 @@ public class Main_Bep extends Activity {
         gr_2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mData.child("Order").child("KV-A2").child(ds2.get(position).getMaBan()).addChildEventListener(new ChildEventListener() {
+                mData.child("UserShop").child(userShop).child("HoaDon").addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        Hoadon hoadon = snapshot.getValue(Hoadon.class);
-                        hd2.add(hoadon);
+                        Detail_Buil ts = snapshot.getValue(Detail_Buil.class);
+                        hd2.add(ts);
                         mBAN = ds2.get(position).getMaBan();
-                        adhd2 =new Hoadon_Adaper(Main_Bep.this, R.layout.item_thanhtoan,hd2);
-                        lv_gioHang_bep.setAdapter(adhd2);
-                        adhd2.notifyDataSetChanged();
+
+                            if (ts.getIdBan().equalsIgnoreCase(mBAN)){
+                                adhd2 =new Mon_order_adapter(Main_Bep.this, R.layout.item_giohang_bep,ts.getmList_mon_order());
+                                lv_gioHang_bep.setAdapter(adhd2);
+                                adhd2.notifyDataSetChanged();
+                            }
+
 
                     }
 
@@ -158,6 +177,7 @@ public class Main_Bep extends Activity {
 
                     }
                 });
+
                 open_dialog_giaHang(Gravity.BOTTOM);
 
             }
@@ -165,15 +185,19 @@ public class Main_Bep extends Activity {
         gr_3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mData.child("Order").child("KV-B1").child(ds3.get(position).getMaBan()).addChildEventListener(new ChildEventListener() {
+                mData.child("UserShop").child(userShop).child("HoaDon").addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        Hoadon hoadon = snapshot.getValue(Hoadon.class);
-                        hd3.add(hoadon);
+                        Detail_Buil ts = snapshot.getValue(Detail_Buil.class);
+                        hd3.add(ts);
                         mBAN = ds3.get(position).getMaBan();
-                        adhd3 =new Hoadon_Adaper(Main_Bep.this, R.layout.item_thanhtoan,hd3);
-                        lv_gioHang_bep.setAdapter(adhd3);
-                        adhd3.notifyDataSetChanged();
+
+                            if (ts.getIdBan().equalsIgnoreCase(mBAN)){
+                                adhd3 =new Mon_order_adapter(Main_Bep.this, R.layout.item_giohang_bep,ts.getmList_mon_order());
+                                lv_gioHang_bep.setAdapter(adhd3);
+                                adhd3.notifyDataSetChanged();
+                            }
+
 
                     }
 
@@ -197,6 +221,7 @@ public class Main_Bep extends Activity {
 
                     }
                 });
+
                 open_dialog_giaHang(Gravity.BOTTOM);
 
             }
@@ -204,15 +229,19 @@ public class Main_Bep extends Activity {
         gr_4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mData.child("Order").child("KV-B2").child(ds4.get(position).getMaBan()).addChildEventListener(new ChildEventListener() {
+                mData.child("UserShop").child(userShop).child("HoaDon").addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        Hoadon hoadon = snapshot.getValue(Hoadon.class);
-                        hd4.add(hoadon);
+                        Detail_Buil ts = snapshot.getValue(Detail_Buil.class);
+                        hd4.add(ts);
                         mBAN = ds4.get(position).getMaBan();
-                        adhd4 =new Hoadon_Adaper(Main_Bep.this, R.layout.item_thanhtoan,hd4);
-                        lv_gioHang_bep.setAdapter(adhd4);
-                        adhd4.notifyDataSetChanged();
+
+                            if (ts.getIdBan().equalsIgnoreCase(mBAN)){
+                                adhd4 =new Mon_order_adapter(Main_Bep.this, R.layout.item_giohang_bep,ts.getmList_mon_order());
+                                lv_gioHang_bep.setAdapter(adhd4);
+                                adhd4.notifyDataSetChanged();
+                            }
+
 
                     }
 
@@ -236,6 +265,7 @@ public class Main_Bep extends Activity {
 
                     }
                 });
+
                 open_dialog_giaHang(Gravity.BOTTOM);
 
             }
@@ -247,22 +277,21 @@ public class Main_Bep extends Activity {
         ds2 = new ArrayList<>();
         ds3 = new ArrayList<>();
         ds4 = new ArrayList<>();
-
-        mData.child("Ban").addChildEventListener(new ChildEventListener() {
+        mData.child("UserShop").child(userShop).child("Ban").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Ban ban = snapshot.getValue(Ban.class);
-                if (ban.getMaKV().equals("KV-A1")&&ban.getChek()==1){
+                if (ban.getMaKV().equals("kva1")&&ban.getTrangThai()==1){
                     ds1.add(ban);
 
                 }
-                else if (ban.getMaKV().equals("KV-A2")&&ban.getChek()==1){
+                else if (ban.getMaKV().equals("kva2")&&ban.getTrangThai()==1){
                     ds2.add(ban);
                 }
-                else if (ban.getMaKV().equals("KV-B1")&&ban.getChek()==1){
+                else if (ban.getMaKV().equals("kvb1")&&ban.getTrangThai()==1){
                     ds3.add(ban);
                 }
-                else if (ban.getMaKV().equals("KV-B2")&&ban.getChek()==1){
+                else if (ban.getMaKV().equals("kvb2")&&ban.getTrangThai()==1){
                     ds4.add(ban);
                 }
                 adapter1 = new Ban_Thu_Ngan_Adapter(Main_Bep.this,R.layout.itemban, ds1);
@@ -336,14 +365,16 @@ public class Main_Bep extends Activity {
         btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mData.child("Ban").child(mBAN).child("chek").setValue(0);
-                Intent intent = new Intent(Main_Bep.this,Main_Bep.class);
-                startActivity(intent);
+                mData.child("UserShop").child(userShop).child("Ban").child(mBAN).child("trangThai").setValue(0);
+                finish();
+                startActivity(getIntent());
+                dialog.dismiss();
 
 
             }
         });
         dialog.show();
     }
+
 
 }
